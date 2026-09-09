@@ -97,7 +97,7 @@ export const Hero: React.FC = () => {
               {/* Main Photo Card */}
               <div className="overflow-hidden rounded-3xl sm:rounded-[2.5rem] border-4 border-white shadow-soft-hover bg-white">
                 <img
-                  src="/images/hero-pets.jpg"
+                  src={`${import.meta.env.BASE_URL}images/hero-pets.jpg`}
                   alt="Veterinária carinhosa examinando cão e gato relaxados na sala de estar"
                   className="w-full h-80 sm:h-96 lg:h-[28rem] object-cover object-center transform hover:scale-105 transition-transform duration-700"
                   loading="eager"

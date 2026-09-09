@@ -113,7 +113,7 @@ export const WhyHomeCare: React.FC = () => {
             <div className="lg:col-span-5 relative">
               <div className="relative rounded-3xl overflow-hidden border-4 border-white shadow-soft">
                 <img
-                  src="/images/cat-cozy.jpg"
+                  src={`${import.meta.env.BASE_URL}images/cat-cozy.jpg`}
                   alt="Gatinho calmo ronronando no sofá durante atendimento domiciliar"
                   className="w-full h-72 sm:h-80 object-cover object-center"
                   loading="lazy"

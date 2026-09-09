@@ -17,7 +17,7 @@ export const VetProfile: React.FC = () => {
                 {/* Photo frame */}
                 <div className="overflow-hidden rounded-3xl border-4 border-brand-green-100 shadow-soft-hover bg-brand-green-50">
                   <img
-                    src="/images/dr-renato.jpg"
+                    src={`${import.meta.env.BASE_URL}images/dr-renato.jpg`}
                     alt={`${CLINIC_CONFIG.vetName} - ${CLINIC_CONFIG.vetTitle}`}
                     className="w-full h-80 sm:h-96 object-cover object-top"
                     loading="lazy"
