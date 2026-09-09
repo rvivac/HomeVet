@@ -70,7 +70,9 @@ Título: "Quem é o Dr. Renato Pegoretti?"
 --------------------------------------------------------------------
 [ÁREA DE COBERTURA: PERUÍBE E REGIÃO]
 Base: Av. Gheorghe Popescu, Peruíbe - SP (11772-600).
-Bairros Atendidos: Centro, Stella Maris, Três Marias, Guaraú, Arpoador, Caraguava, Ribamar, Oásis, Balneários e condomínios de Peruíbe + Itanhaém e região sob agendamento prévio.
+48 Bairros e Balneários com Cobertura Oficial em Peruíbe:
+Ana Dias | Arpoador | Bairro dos Prados | Baissununga | Balneário Barra de Jangada | Balneário Casa Blanca | Balneário Continental | Balneário Flórida | Balneário Garça Vermelha | Balneário Jangada | Balneário Josedy | Balneário Maria Helena Novaes | Balneário Nova Peruíbe | Balneário Novo Horizonte | Balneário Oásis | Balneário Samburá | Balneário São João Batista | Balneário Stella Maris | Balneário Três Marias | Bananal | Centro (Área Central) | Cidade Nova Peruíbe | Costão | Estação | Estância São José | Estância São Marcos | Guaraú | Jardim Arpoador | Jardim Beira-Mar | Jardim Belmar | Jardim Brasil | Jardim Caraminguava (Caraguava) | Jardim Casa Blanca | Jardim das Flores | Jardim dos Prados | Jardim Europa | Jardim Guaraú | Jardim Icaraíba | Jardim Imperador | Jardim Itatins | Jardim Mar e Sol | Jardim Márcia | Jardim Peruíbe | Jardim Ribamar | Jardim Veneza | Parque Turístico | Vila Erminda | Vila Romar
++ Itanhaém e litoral sul sob agendamento prévio.
 
 --------------------------------------------------------------------
 [PERGUNTAS FREQUENTES (FAQ)]

@@ -137,15 +137,63 @@ export const SERVICES: ServiceItem[] = [
 ];
 
 export const NEIGHBORHOODS: NeighborhoodItem[] = [
-  { name: 'Centro / Estação', zone: 'Peruíbe' },
-  { name: 'Stella Maris', zone: 'Peruíbe' },
-  { name: 'Três Marias', zone: 'Peruíbe' },
-  { name: 'Guaraú / Prainha', zone: 'Peruíbe' },
-  { name: 'Arpoador / Caraguava', zone: 'Peruíbe' },
-  { name: 'Ribamar / Oásis', zone: 'Peruíbe' },
-  { name: 'São João Batista / Flórida', zone: 'Peruíbe' },
-  { name: 'Balneário São José', zone: 'Peruíbe' },
-  { name: 'Condomínios & Balneários', zone: 'Peruíbe' },
+  // Balneários
+  { name: 'Balneário Stella Maris', zone: 'Balneários' },
+  { name: 'Balneário Três Marias', zone: 'Balneários' },
+  { name: 'Balneário Flórida', zone: 'Balneários' },
+  { name: 'Balneário Oásis', zone: 'Balneários' },
+  { name: 'Balneário Nova Peruíbe', zone: 'Balneários' },
+  { name: 'Balneário Barra de Jangada', zone: 'Balneários' },
+  { name: 'Balneário Casa Blanca', zone: 'Balneários' },
+  { name: 'Balneário Continental', zone: 'Balneários' },
+  { name: 'Balneário Garça Vermelha', zone: 'Balneários' },
+  { name: 'Balneário Jangada', zone: 'Balneários' },
+  { name: 'Balneário Josedy', zone: 'Balneários' },
+  { name: 'Balneário Maria Helena Novaes', zone: 'Balneários' },
+  { name: 'Balneário Novo Horizonte', zone: 'Balneários' },
+  { name: 'Balneário Samburá', zone: 'Balneários' },
+  { name: 'Balneário São João Batista', zone: 'Balneários' },
+
+  // Jardins
+  { name: 'Jardim Ribamar', zone: 'Jardins' },
+  { name: 'Jardim Caraminguava (Caraguava)', zone: 'Jardins' },
+  { name: 'Jardim Arpoador', zone: 'Jardins' },
+  { name: 'Jardim Beira-Mar', zone: 'Jardins' },
+  { name: 'Jardim Belmar', zone: 'Jardins' },
+  { name: 'Jardim Brasil', zone: 'Jardins' },
+  { name: 'Jardim Casa Blanca', zone: 'Jardins' },
+  { name: 'Jardim das Flores', zone: 'Jardins' },
+  { name: 'Jardim dos Prados', zone: 'Jardins' },
+  { name: 'Jardim Europa', zone: 'Jardins' },
+  { name: 'Jardim Guaraú', zone: 'Jardins' },
+  { name: 'Jardim Icaraíba', zone: 'Jardins' },
+  { name: 'Jardim Imperador', zone: 'Jardins' },
+  { name: 'Jardim Itatins', zone: 'Jardins' },
+  { name: 'Jardim Mar e Sol', zone: 'Jardins' },
+  { name: 'Jardim Márcia', zone: 'Jardins' },
+  { name: 'Jardim Peruíbe', zone: 'Jardins' },
+  { name: 'Jardim Veneza', zone: 'Jardins' },
+
+  // Centro e Estâncias
+  { name: 'Centro (Área Central)', zone: 'Centro & Estâncias' },
+  { name: 'Estação', zone: 'Centro & Estâncias' },
+  { name: 'Cidade Nova Peruíbe', zone: 'Centro & Estâncias' },
+  { name: 'Estância São José', zone: 'Centro & Estâncias' },
+  { name: 'Estância São Marcos', zone: 'Centro & Estâncias' },
+
+  // Litoral, Praias e Vilas
+  { name: 'Guaraú', zone: 'Praias & Vilas' },
+  { name: 'Costão', zone: 'Praias & Vilas' },
+  { name: 'Arpoador', zone: 'Praias & Vilas' },
+  { name: 'Baissununga', zone: 'Praias & Vilas' },
+  { name: 'Bananal', zone: 'Praias & Vilas' },
+  { name: 'Ana Dias', zone: 'Praias & Vilas' },
+  { name: 'Bairro dos Prados', zone: 'Praias & Vilas' },
+  { name: 'Parque Turístico', zone: 'Praias & Vilas' },
+  { name: 'Vila Erminda', zone: 'Praias & Vilas' },
+  { name: 'Vila Romar', zone: 'Praias & Vilas' },
+
+  // Região Metropolitana
   { name: 'Itanhaém e Região Vizinha', zone: 'Região Litoral Sul' },
 ];
 
