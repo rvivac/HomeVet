@@ -105,23 +105,23 @@ export const Hero: React.FC = () => {
               </div>
 
               {/* Floating Review / Rating Pill */}
-              <div className="absolute -bottom-5 -left-4 sm:-left-6 bg-white/95 backdrop-blur-md p-3.5 sm:p-4 rounded-2xl shadow-soft border border-brand-green-100 flex items-center gap-3 animate-float">
-                <div className="w-10 h-10 rounded-xl bg-brand-yellow-100 flex items-center justify-center text-brand-yellow-500">
-                  <Star className="w-5 h-5 fill-brand-yellow-400 text-brand-yellow-400" />
+              <div className="absolute -bottom-4 left-0 sm:-bottom-5 sm:-left-6 bg-white/95 backdrop-blur-md p-3 sm:p-4 rounded-2xl shadow-soft border border-brand-green-100 flex items-center gap-3 animate-float max-w-[85%] sm:max-w-none">
+                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-brand-yellow-100 flex items-center justify-center text-brand-yellow-500 shrink-0">
+                  <Star className="w-4 h-4 sm:w-5 sm:h-5 fill-brand-yellow-400 text-brand-yellow-400" />
                 </div>
                 <div>
                   <div className="flex items-center gap-1">
-                    <span className="font-display font-bold text-base text-brand-green-900">4.9 / 5.0</span>
-                    <span className="text-xs text-amber-500">★★★★★</span>
+                    <span className="font-display font-bold text-sm sm:text-base text-brand-green-900">4.9 / 5.0</span>
+                    <span className="text-[10px] sm:text-xs text-amber-500">★★★★★</span>
                   </div>
-                  <p className="text-xs text-gray-500 font-medium">+450 pets cuidados no lar</p>
+                  <p className="text-[10px] sm:text-xs text-gray-500 font-medium">+450 pets cuidados no lar</p>
                 </div>
               </div>
 
               {/* Floating Fear-Free Badge */}
-              <div className="absolute -top-4 -right-4 sm:-right-5 bg-white/95 backdrop-blur-md py-2 px-3.5 rounded-full shadow-soft border border-brand-green-100 flex items-center gap-2 animate-bounce-subtle">
-                <Heart className="w-4 h-4 text-rose-500 fill-rose-500" />
-                <span className="text-xs font-bold text-brand-green-900">100% Fear-Free (Livre de Medo)</span>
+              <div className="absolute -top-3 right-0 sm:-top-4 sm:-right-5 bg-white/95 backdrop-blur-md py-1.5 px-3 sm:py-2 sm:px-3.5 rounded-full shadow-soft border border-brand-green-100 flex items-center gap-1.5 sm:gap-2 animate-bounce-subtle">
+                <Heart className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-rose-500 fill-rose-500" />
+                <span className="text-[11px] sm:text-xs font-bold text-brand-green-900">100% Fear-Free (Sem Medo)</span>
               </div>
 
             </div>

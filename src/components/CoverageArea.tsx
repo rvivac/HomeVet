@@ -52,7 +52,7 @@ export const CoverageArea: React.FC = () => {
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 placeholder="Busque pelo nome do seu bairro ou balneário..."
-                className="w-full pl-12 pr-20 py-3.5 rounded-2xl bg-brand-bg border border-brand-green-100 text-sm focus:outline-none focus:ring-2 focus:ring-brand-green-500 focus:bg-white transition-all shadow-xs"
+                className="w-full pl-12 pr-20 py-3.5 rounded-2xl bg-brand-bg border border-brand-green-100 text-base sm:text-sm focus:outline-none focus:ring-2 focus:ring-brand-green-500 focus:bg-white transition-all shadow-xs"
               />
               {searchTerm && (
                 <button

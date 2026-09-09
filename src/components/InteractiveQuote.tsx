@@ -107,7 +107,7 @@ export const InteractiveQuote: React.FC = () => {
                   value={petName}
                   onChange={(e) => setPetName(e.target.value)}
                   placeholder="Ex: Bento, Mel, Luna..."
-                  className="w-full px-4 py-3 rounded-2xl bg-brand-bg border border-brand-green-100 text-sm text-[#2D3748] focus:outline-none focus:ring-2 focus:ring-brand-green-500 focus:bg-white transition-all"
+                  className="w-full px-4 py-3 rounded-2xl bg-brand-bg border border-brand-green-100 text-base sm:text-sm text-[#2D3748] focus:outline-none focus:ring-2 focus:ring-brand-green-500 focus:bg-white transition-all"
                 />
               </div>
 
@@ -119,7 +119,7 @@ export const InteractiveQuote: React.FC = () => {
                 <select
                   value={serviceType}
                   onChange={(e) => setServiceType(e.target.value)}
-                  className="w-full px-4 py-3 rounded-2xl bg-brand-bg border border-brand-green-100 text-sm text-[#2D3748] focus:outline-none focus:ring-2 focus:ring-brand-green-500 focus:bg-white transition-all cursor-pointer font-medium"
+                  className="w-full px-4 py-3 rounded-2xl bg-brand-bg border border-brand-green-100 text-base sm:text-sm text-[#2D3748] focus:outline-none focus:ring-2 focus:ring-brand-green-500 focus:bg-white transition-all cursor-pointer font-medium"
                 >
                   <option value="Consulta Clínica de Rotina">Consulta Clínica de Rotina / Check-up</option>
                   <option value="Vacinação Atualizada (Importada)">Vacinação Atualizada (Importada)</option>
@@ -137,7 +137,7 @@ export const InteractiveQuote: React.FC = () => {
                 <select
                   value={neighborhood}
                   onChange={(e) => setNeighborhood(e.target.value)}
-                  className="w-full px-4 py-3 rounded-2xl bg-brand-bg border border-brand-green-100 text-sm text-[#2D3748] focus:outline-none focus:ring-2 focus:ring-brand-green-500 focus:bg-white transition-all cursor-pointer font-medium"
+                  className="w-full px-4 py-3 rounded-2xl bg-brand-bg border border-brand-green-100 text-base sm:text-sm text-[#2D3748] focus:outline-none focus:ring-2 focus:ring-brand-green-500 focus:bg-white transition-all cursor-pointer font-medium"
                 >
                   {NEIGHBORHOODS.map((item) => (
                     <option key={item.name} value={item.name}>

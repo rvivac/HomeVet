@@ -20,7 +20,7 @@ export const Header: React.FC = () => {
     { label: 'Serviços', href: '#servicos' },
     { label: 'Simulador', href: '#simulador' },
     { label: 'Área de Atendimento', href: '#cobertura' },
-    { label: 'Sobre a Dra.', href: '#sobre' },
+    { label: 'Sobre o Dr. Renato', href: '#sobre' },
     { label: 'Dúvidas', href: '#faq' },
   ];
 
