@@ -64,7 +64,7 @@ export const CoverageMap: React.FC<CoverageMapProps> = ({
         : 'https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}';
     };
 
-    const tileLayer = L.tileLayer(getTileUrl(mapType), {
+    const tileLayer = L.tileLayer(getTileUrl('roadmap'), {
       maxZoom: 19,
       subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
     }).addTo(map);
@@ -113,7 +113,7 @@ export const CoverageMap: React.FC<CoverageMapProps> = ({
       setTimeout(() => {
         if (isCancelled || !mapInstanceRef.current) return;
         map.invalidateSize();
-        map.fitBounds(polygon.getBounds(), { padding: [25, 25] });
+        map.fitBounds(polygon.getBounds(), { padding: [10, 10] });
       }, 250);
     });
 
@@ -144,18 +144,18 @@ export const CoverageMap: React.FC<CoverageMapProps> = ({
     if (!mapInstanceRef.current || !leafletLibRef.current) return;
     const L = leafletLibRef.current;
     const polygon = L.polygon(COVERAGE_POLYGON);
-    mapInstanceRef.current.fitBounds(polygon.getBounds(), { padding: [25, 25] });
+    mapInstanceRef.current.fitBounds(polygon.getBounds(), { padding: [10, 10] });
   };
 
   return (
-    <div className="relative rounded-2xl overflow-hidden border border-brand-green-200/90 shadow-md bg-white">
+    <div className="relative rounded-2xl overflow-hidden border border-brand-green-200/90 shadow-xs bg-white">
       
       {/* Top Map Toolbar with Google-style toggles */}
-      <div className="absolute top-2.5 left-2.5 z-20 flex items-center gap-1.5 bg-white/95 backdrop-blur-md rounded-xl p-1 shadow-md border border-gray-200 text-xs font-semibold">
+      <div className="absolute top-2 left-2 z-20 flex items-center gap-1 bg-white/95 backdrop-blur-md rounded-lg p-0.5 shadow-xs border border-gray-200 text-[11px] font-semibold">
         <button
           type="button"
           onClick={() => handleMapTypeChange('roadmap')}
-          className={`px-2.5 py-1 rounded-lg transition-all cursor-pointer ${
+          className={`px-2 py-0.5 rounded-md transition-all cursor-pointer ${
             mapType === 'roadmap'
               ? 'bg-brand-green-800 text-white shadow-xs font-bold'
               : 'text-gray-700 hover:bg-gray-100'
@@ -166,7 +166,7 @@ export const CoverageMap: React.FC<CoverageMapProps> = ({
         <button
           type="button"
           onClick={() => handleMapTypeChange('satellite')}
-          className={`px-2.5 py-1 rounded-lg transition-all cursor-pointer ${
+          className={`px-2 py-0.5 rounded-md transition-all cursor-pointer ${
             mapType === 'satellite'
               ? 'bg-brand-green-800 text-white shadow-xs font-bold'
               : 'text-gray-700 hover:bg-gray-100'
@@ -177,25 +177,25 @@ export const CoverageMap: React.FC<CoverageMapProps> = ({
       </div>
 
       {/* Top Right Actions */}
-      <div className="absolute top-2.5 right-2.5 z-20 flex items-center gap-1.5">
+      <div className="absolute top-2 right-2 z-20 flex items-center gap-1">
         <button
           type="button"
           onClick={handleRecenter}
-          className="bg-white/95 hover:bg-white text-gray-700 hover:text-brand-green-900 p-2 rounded-xl shadow-md border border-gray-200 backdrop-blur-md transition-transform hover:scale-105 cursor-pointer"
+          className="bg-white/95 hover:bg-white text-gray-700 hover:text-brand-green-900 p-1.5 rounded-lg shadow-xs border border-gray-200 backdrop-blur-md transition-transform hover:scale-105 cursor-pointer"
           title="Recentralizar área de atendimento"
           aria-label="Recentralizar mapa"
         >
-          <Navigation className="w-4 h-4" />
+          <Navigation className="w-3.5 h-3.5" />
         </button>
 
         <a
           href="https://www.google.com/maps/search/?api=1&query=Peruíbe+-+SP"
           target="_blank"
           rel="noopener noreferrer"
-          className="bg-white/95 hover:bg-white text-brand-green-900 font-bold px-2.5 py-1.5 rounded-xl shadow-md border border-gray-200 backdrop-blur-md transition-all hover:scale-105 flex items-center gap-1 text-xs"
+          className="bg-white/95 hover:bg-white text-brand-green-900 font-bold px-2 py-1 rounded-lg shadow-xs border border-gray-200 backdrop-blur-md transition-all hover:scale-105 flex items-center gap-1 text-[11px]"
           title="Abrir no aplicativo Google Maps"
         >
-          <ExternalLink className="w-3.5 h-3.5" />
+          <ExternalLink className="w-3 h-3" />
           <span className="hidden sm:inline">Google Maps</span>
         </a>
       </div>
@@ -208,15 +208,15 @@ export const CoverageMap: React.FC<CoverageMapProps> = ({
       />
 
       {/* Bottom Info Banner */}
-      <div className="bg-brand-bg/95 border-t border-brand-green-100 p-2.5 sm:px-4 flex flex-wrap items-center justify-between gap-2 text-xs">
-        <div className="flex items-center gap-2 text-brand-green-900 font-semibold">
-          <span className="w-3 h-3 rounded-full bg-red-500/20 border border-red-600 flex items-center justify-center shrink-0">
-            <span className="w-1.5 h-1.5 rounded-full bg-red-600"></span>
+      <div className="bg-brand-bg/95 border-t border-brand-green-100 py-1.5 px-3 flex items-center justify-between gap-2 text-[11px]">
+        <div className="flex items-center gap-1.5 text-brand-green-900 font-semibold truncate">
+          <span className="w-2.5 h-2.5 rounded-full bg-red-500/20 border border-red-600 flex items-center justify-center shrink-0">
+            <span className="w-1 h-1 rounded-full bg-red-600"></span>
           </span>
-          <span>Área demarcada: Peruíbe, Itanhaém, Mongaguá, Itariri e Barra do Una</span>
+          <span className="truncate">Peruíbe, Itanhaém, Mongaguá, Itariri e Barra do Una</span>
         </div>
-        <div className="text-[11px] text-brand-green-700 font-medium flex items-center gap-1">
-          <span>Arraste e use zoom (+ / -)</span>
+        <div className="text-[10px] text-brand-green-700 font-medium shrink-0 hidden sm:inline">
+          Zoom (+ / -)
         </div>
       </div>
 
