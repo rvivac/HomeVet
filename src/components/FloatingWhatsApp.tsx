@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { MessageCircle, X, Search, CheckCircle2, ChevronDown, Star, Quote, Sparkles, AlertTriangle, Clock } from 'lucide-react';
+import { MessageCircle, X, Search, CheckCircle2, MapPin, ChevronDown, Star, Quote, Sparkles, AlertTriangle, Clock } from 'lucide-react';
 import { NEIGHBORHOODS, FAQS, TESTIMONIALS, ALERT_SIGNS, CHECKUP_INTERVALS, createWhatsAppLink } from '../data/content';
 import { InteractiveQuoteModal } from './InteractiveQuote';
 import { CoverageMap } from './CoverageMap';
@@ -228,6 +228,8 @@ export const FloatingWhatsApp: React.FC = () => {
   const [isFaqModalOpen, setIsFaqModalOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedZone, setSelectedZone] = useState<string>('all');
+  const [selectedNeighborhood, setSelectedNeighborhood] = useState<string>('');
+  const [showAllBairros, setShowAllBairros] = useState<boolean>(false);
   const [openFaqId, setOpenFaqId] = useState<string | null>(FAQS[0]?.id || null);
   const [faqSearch, setFaqSearch] = useState('');
 
@@ -508,71 +510,182 @@ export const FloatingWhatsApp: React.FC = () => {
               <CoverageMap height="290px" />
             </div>
 
-            {/* Search and Filters */}
-            <div className="p-4 sm:p-6 border-b border-brand-green-100/60 bg-white space-y-3">
-              <div className="relative">
-                <Search className="w-4 h-4 text-gray-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
-                <input
-                  type="text"
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  placeholder="Buscar pelo nome do seu bairro ou balneário..."
-                  className="w-full pl-10 pr-16 py-2.5 rounded-xl bg-brand-bg border border-brand-green-100 text-sm focus:outline-none focus:ring-2 focus:ring-brand-green-500 focus:bg-white transition-all"
-                />
-                {searchTerm && (
-                  <button
-                    onClick={() => setSearchTerm('')}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-gray-400 hover:text-gray-600 bg-gray-100 px-2 py-0.5 rounded cursor-pointer"
+            {/* Dropdown de Seleção de Bairros */}
+            <div className="p-4 sm:p-6 border-b border-brand-green-100/60 bg-white space-y-3.5">
+              <div>
+                <label
+                  htmlFor="neighborhood-dropdown"
+                  className="block text-xs font-bold uppercase tracking-wider text-brand-green-900 mb-1.5 flex items-center gap-1.5"
+                >
+                  <MapPin className="w-3.5 h-3.5 text-brand-green-700" />
+                  <span>Consulte seu Bairro ou Balneário na Lista Suspensa:</span>
+                </label>
+                
+                <div className="relative">
+                  <select
+                    id="neighborhood-dropdown"
+                    value={selectedNeighborhood}
+                    onChange={(e) => {
+                      const val = e.target.value;
+                      setSelectedNeighborhood(val);
+                      if (val) {
+                        const item = NEIGHBORHOODS.find((n) => n.name === val);
+                        if (item) setSelectedZone(item.zone);
+                      }
+                    }}
+                    className="w-full bg-brand-bg hover:bg-brand-green-50/60 border-2 border-brand-green-300 focus:border-brand-green-600 focus:bg-white rounded-2xl py-3 pl-4 pr-10 text-sm font-semibold text-brand-green-900 focus:outline-none transition-all cursor-pointer shadow-xs appearance-none"
                   >
-                    Limpar
-                  </button>
-                )}
+                    <option value="">Selecione seu bairro na lista suspensa (48 bairros atendidos)...</option>
+                    {allZones
+                      .filter((z) => z !== 'all')
+                      .map((zone) => (
+                        <optgroup key={zone} label={`Região: ${zone}`}>
+                          {NEIGHBORHOODS.filter((n) => n.zone === zone).map((bairro) => (
+                            <option key={bairro.name} value={bairro.name}>
+                              {bairro.name}
+                            </option>
+                          ))}
+                        </optgroup>
+                      ))}
+                  </select>
+                  <ChevronDown className="w-5 h-5 text-brand-green-700 absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                </div>
               </div>
 
-              {/* Zone Filter Chips */}
-              <div className="flex items-center gap-1.5 overflow-x-auto pb-1">
-                {allZones.map((zone) => (
-                  <button
-                    key={zone}
-                    onClick={() => setSelectedZone(zone)}
-                    className={`px-3 py-1 rounded-lg text-xs font-bold whitespace-nowrap transition-all cursor-pointer ${
-                      selectedZone === zone
-                        ? 'bg-brand-green-800 text-white shadow-xs'
-                        : 'bg-brand-bg text-gray-600 hover:bg-brand-green-50 border border-brand-green-100'
-                    }`}
+              {/* Card de Confirmação quando selecionado no dropdown */}
+              {selectedNeighborhood && (
+                <div className="p-3.5 sm:p-4 rounded-2xl bg-brand-green-50 border-2 border-brand-green-300 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 animate-fadeIn">
+                  <div className="flex items-center gap-3">
+                    <div className="w-9 h-9 rounded-xl bg-whatsapp text-white flex items-center justify-center shrink-0 shadow-xs">
+                      <CheckCircle2 className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <div className="font-display font-bold text-sm text-brand-green-900 flex items-center gap-2">
+                        <span>{selectedNeighborhood}</span>
+                        <span className="text-[10px] text-brand-green-800 bg-brand-green-200/80 px-2 py-0.5 rounded-full font-medium">
+                          {NEIGHBORHOODS.find((n) => n.name === selectedNeighborhood)?.zone}
+                        </span>
+                      </div>
+                      <p className="text-xs text-brand-green-700 mt-0.5 font-medium">
+                        ✓ Rota de atendimento domiciliar confirmada para este endereço!
+                      </p>
+                    </div>
+                  </div>
+                  <a
+                    href={createWhatsAppLink(`Olá! Gostaria de agendar um atendimento veterinário domiciliar no bairro ${selectedNeighborhood} em Peruíbe.`)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-whatsapp hover:bg-whatsapp-hover text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow-pill transition-all cursor-pointer"
                   >
-                    {zone === 'all' ? 'Todos (48)' : zone}
-                  </button>
-                ))}
+                    <MessageCircle className="w-3.5 h-3.5 fill-white" />
+                    <span>Agendar Consulta</span>
+                  </a>
+                </div>
+              )}
+
+              {/* Dropdown de Região + Campo de Busca Rápida */}
+              <div className="pt-2 border-t border-brand-green-100/70 flex flex-col sm:flex-row items-center gap-2.5">
+                {/* Dropdown de Filtro por Região */}
+                <div className="relative w-full sm:w-1/2">
+                  <select
+                    value={selectedZone}
+                    onChange={(e) => {
+                      setSelectedZone(e.target.value);
+                      setSelectedNeighborhood('');
+                    }}
+                    className="w-full bg-brand-bg border border-brand-green-200 rounded-xl py-2 pl-3 pr-8 text-xs font-semibold text-brand-green-900 focus:outline-none cursor-pointer appearance-none"
+                    aria-label="Filtrar por região"
+                  >
+                    <option value="all">Filtrar Região: Todas (48 bairros)</option>
+                    {allZones
+                      .filter((z) => z !== 'all')
+                      .map((zone) => (
+                        <option key={zone} value={zone}>
+                          {zone} ({NEIGHBORHOODS.filter((n) => n.zone === zone).length} bairros)
+                        </option>
+                      ))}
+                  </select>
+                  <ChevronDown className="w-4 h-4 text-gray-400 absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                </div>
+
+                {/* Busca rápida */}
+                <div className="relative w-full sm:w-1/2">
+                  <Search className="w-3.5 h-3.5 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
+                  <input
+                    type="text"
+                    value={searchTerm}
+                    onChange={(e) => {
+                      setSearchTerm(e.target.value);
+                      if (e.target.value) setShowAllBairros(true);
+                    }}
+                    placeholder="Ou digite o nome do bairro..."
+                    className="w-full pl-8 pr-7 py-2 rounded-xl bg-brand-bg border border-brand-green-200 text-xs focus:outline-none focus:ring-1 focus:ring-brand-green-500 focus:bg-white transition-all"
+                  />
+                  {searchTerm && (
+                    <button
+                      onClick={() => setSearchTerm('')}
+                      className="absolute right-2 top-1/2 -translate-y-1/2 text-[10px] text-gray-400 hover:text-gray-600 cursor-pointer"
+                    >
+                      ✕
+                    </button>
+                  )}
+                </div>
               </div>
             </div>
 
-            {/* Neighborhood List (Scrollable) */}
-            <div className="flex-1 overflow-y-auto p-4 sm:p-6 max-h-72">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                {filteredNeighborhoods.map((item, index) => (
-                  <div
-                    key={index}
-                    className="flex items-center justify-between p-2.5 rounded-xl bg-brand-bg/80 border border-brand-green-100 text-xs text-[#2D3748]"
-                  >
-                    <div className="flex items-center gap-2">
-                      <div className="w-4 h-4 rounded-full bg-brand-green-100 flex items-center justify-center shrink-0 text-brand-green-700">
-                        <CheckCircle2 className="w-3 h-3" />
-                      </div>
-                      <span className="font-semibold text-gray-800">{item.name}</span>
-                    </div>
-                    <span className="text-[10px] text-brand-green-700 bg-white px-2 py-0.5 rounded-md border border-brand-green-100 font-medium">
-                      {item.zone}
-                    </span>
-                  </div>
-                ))}
+            {/* Visualização de Lista com Alternador Expansível */}
+            <div className="p-4 sm:p-5 bg-brand-bg/40 flex-1 overflow-y-auto">
+              <div className="flex items-center justify-between mb-2.5">
+                <span className="text-xs font-bold text-brand-green-900">
+                  {selectedZone === 'all' ? 'Lista de Bairros' : selectedZone} ({filteredNeighborhoods.length})
+                </span>
+                <button
+                  type="button"
+                  onClick={() => setShowAllBairros(!showAllBairros)}
+                  className="text-xs font-semibold text-brand-green-700 hover:text-brand-green-900 flex items-center gap-1 cursor-pointer bg-white px-2.5 py-1 rounded-lg border border-brand-green-200 shadow-2xs"
+                >
+                  <span>{showAllBairros ? 'Recolher lista' : 'Ver em cartões'}</span>
+                  <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${showAllBairros ? 'rotate-180' : ''}`} />
+                </button>
               </div>
 
+              {showAllBairros && (
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 max-h-52 overflow-y-auto pr-1 animate-fadeIn">
+                  {filteredNeighborhoods.map((item, index) => {
+                    const isSelected = selectedNeighborhood === item.name;
+                    return (
+                      <button
+                        key={index}
+                        type="button"
+                        onClick={() => setSelectedNeighborhood(item.name)}
+                        className={`flex items-center justify-between p-2 rounded-xl border text-xs text-left transition-all cursor-pointer ${
+                          isSelected
+                            ? 'bg-brand-green-100 border-brand-green-500 font-bold text-brand-green-950 shadow-xs'
+                            : 'bg-white border-brand-green-100/80 hover:border-brand-green-300 text-gray-700 hover:bg-brand-green-50/50'
+                        }`}
+                      >
+                        <div className="flex items-center gap-2">
+                          <div className={`w-3.5 h-3.5 rounded-full flex items-center justify-center shrink-0 ${
+                            isSelected ? 'bg-brand-green-700 text-white' : 'bg-brand-green-100 text-brand-green-700'
+                          }`}>
+                            <CheckCircle2 className="w-2.5 h-2.5" />
+                          </div>
+                          <span className="truncate">{item.name}</span>
+                        </div>
+                        <span className="text-[10px] text-brand-green-700 bg-brand-bg px-1.5 py-0.5 rounded border border-brand-green-100 shrink-0 font-medium">
+                          {item.zone}
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
+
               {filteredNeighborhoods.length === 0 && (
-                <div className="text-center py-8 text-gray-500 text-sm">
+                <div className="text-center py-4 text-gray-500 text-xs">
                   <p>Nenhum bairro encontrado com "{searchTerm}".</p>
-                  <p className="text-xs text-brand-green-700 mt-1">
-                    Atendemos todo o município de Peruíbe e cidades vizinhas! Consulte-nos no WhatsApp.
+                  <p className="text-brand-green-700 mt-0.5">
+                    Atendemos todo o município de Peruíbe! Fale conosco pelo WhatsApp.
                   </p>
                 </div>
               )}
