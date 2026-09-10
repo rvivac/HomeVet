@@ -88,65 +88,80 @@ export const Footer: React.FC = () => {
             </div>
           </div>
 
-          {/* Quick Nav Links */}
-          <div className="lg:col-span-3 space-y-3">
-            <h4 className="font-display font-bold text-base text-white">
-              Navegação Rápida
-            </h4>
-            <ul className="space-y-2 text-sm text-brand-green-100/70">
-              <li>
-                <a href="#inicio" className="hover:text-white transition-colors">Início</a>
-              </li>
-              <li>
-                <a href="#vantagens" className="hover:text-white transition-colors">Vantagens no Lar</a>
-              </li>
-              <li>
-                <a href="#servicos" className="hover:text-white transition-colors">Nossos Serviços</a>
-              </li>
-              <li>
-                <button
-                  onClick={() => window.dispatchEvent(new CustomEvent('open-quote-modal'))}
-                  className="hover:text-white transition-colors text-left text-sm text-brand-green-100/70 cursor-pointer"
-                >
-                  Monte seu Atendimento Personalizado
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => window.dispatchEvent(new CustomEvent('open-coverage-modal'))}
-                  className="hover:text-white transition-colors text-left text-sm text-brand-green-100/70"
-                >
-                  Regiões & Bairros Atendidos
-                </button>
-              </li>
-              <li>
-                <a href="#sobre" className="hover:text-white transition-colors">Quem Somos (Equipe)</a>
-              </li>
-              <li>
-                <button
-                  onClick={() => window.dispatchEvent(new CustomEvent('open-testimonials-modal'))}
-                  className="hover:text-white transition-colors text-left text-sm text-brand-green-100/70 cursor-pointer"
-                >
-                  Tutores e Pets Felizes
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => window.dispatchEvent(new CustomEvent('open-alert-signs-modal'))}
-                  className="hover:text-white transition-colors text-left text-sm text-brand-green-100/70 cursor-pointer"
-                >
-                  Quando Chamar o Veterinário?
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => window.dispatchEvent(new CustomEvent('open-faq-modal'))}
-                  className="hover:text-white transition-colors text-left text-sm text-brand-green-100/70 cursor-pointer"
-                >
-                  Dúvidas Frequentes
-                </button>
-              </li>
-            </ul>
+          {/* Quick Nav Links & Shortcuts */}
+          <div className="lg:col-span-3 space-y-4">
+            <div>
+              <h4 className="font-display font-bold text-sm text-white uppercase tracking-wider mb-2.5">
+                Navegação
+              </h4>
+              <ul className="space-y-1.5 text-xs sm:text-sm text-brand-green-100/70">
+                <li>
+                  <a href="#inicio" className="hover:text-white transition-colors">Início</a>
+                </li>
+                <li>
+                  <a href="#vantagens" className="hover:text-white transition-colors">Vantagens no Lar</a>
+                </li>
+                <li>
+                  <a href="#servicos" className="hover:text-white transition-colors">Nossos Serviços</a>
+                </li>
+                <li>
+                  <a href="#sobre" className="hover:text-white transition-colors">Quem Somos (Equipe)</a>
+                </li>
+              </ul>
+            </div>
+
+            <div className="pt-3 border-t border-brand-green-800/80">
+              <h4 className="font-display font-bold text-sm text-white uppercase tracking-wider mb-2.5">
+                Atalhos & Informações
+              </h4>
+              <ul className="space-y-1.5 text-xs sm:text-sm text-brand-green-100/70">
+                <li>
+                  <button
+                    type="button"
+                    onClick={() => window.dispatchEvent(new CustomEvent('open-quote-modal'))}
+                    className="hover:text-white transition-colors text-left cursor-pointer flex items-center gap-1.5"
+                  >
+                    <span>✨ Monte seu Atendimento</span>
+                  </button>
+                </li>
+                <li>
+                  <button
+                    type="button"
+                    onClick={() => window.dispatchEvent(new CustomEvent('open-coverage-modal'))}
+                    className="hover:text-white transition-colors text-left cursor-pointer flex items-center gap-1.5"
+                  >
+                    <span>🧭 Regiões & Bairros Atendidos</span>
+                  </button>
+                </li>
+                <li>
+                  <button
+                    type="button"
+                    onClick={() => window.dispatchEvent(new CustomEvent('open-alert-signs-modal'))}
+                    className="hover:text-white transition-colors text-left cursor-pointer flex items-center gap-1.5"
+                  >
+                    <span>🚑 Quando Chamar o Veterinário?</span>
+                  </button>
+                </li>
+                <li>
+                  <button
+                    type="button"
+                    onClick={() => window.dispatchEvent(new CustomEvent('open-testimonials-modal'))}
+                    className="hover:text-white transition-colors text-left cursor-pointer flex items-center gap-1.5"
+                  >
+                    <span>⭐ Tutores e Pets Felizes</span>
+                  </button>
+                </li>
+                <li>
+                  <button
+                    type="button"
+                    onClick={() => window.dispatchEvent(new CustomEvent('open-faq-modal'))}
+                    className="hover:text-white transition-colors text-left cursor-pointer flex items-center gap-1.5"
+                  >
+                    <span>❓ Dúvidas Frequentes</span>
+                  </button>
+                </li>
+              </ul>
+            </div>
           </div>
 
           {/* Hours, CRMV & Location */}

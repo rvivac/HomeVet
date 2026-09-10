@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { MessageCircle, X, Search, CheckCircle2, MapPin, HelpCircle, ChevronDown, Heart, Star, Quote, Sparkles, AlertTriangle, Clock } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { MessageCircle, X, Search, CheckCircle2, ChevronDown, Star, Quote, Sparkles, AlertTriangle, Clock } from 'lucide-react';
 import { NEIGHBORHOODS, FAQS, TESTIMONIALS, ALERT_SIGNS, CHECKUP_INTERVALS, createWhatsAppLink } from '../data/content';
 import { InteractiveQuoteModal } from './InteractiveQuote';
 import { CoverageMap } from './CoverageMap';
@@ -231,6 +231,9 @@ export const FloatingWhatsApp: React.FC = () => {
   const [openFaqId, setOpenFaqId] = useState<string | null>(FAQS[0]?.id || null);
   const [faqSearch, setFaqSearch] = useState('');
 
+  const [isQuickMenuOpen, setIsQuickMenuOpen] = useState(false);
+  const quickMenuRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     const handleOpenQuote = () => setIsQuoteModalOpen(true);
     const handleOpenAlertSigns = () => setIsAlertSignsModalOpen(true);
@@ -244,12 +247,20 @@ export const FloatingWhatsApp: React.FC = () => {
     window.addEventListener('open-coverage-modal', handleOpenCoverage);
     window.addEventListener('open-faq-modal', handleOpenFaq);
 
+    const handleClickOutside = (event: MouseEvent) => {
+      if (quickMenuRef.current && !quickMenuRef.current.contains(event.target as Node)) {
+        setIsQuickMenuOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+
     return () => {
       window.removeEventListener('open-quote-modal', handleOpenQuote);
       window.removeEventListener('open-alert-signs-modal', handleOpenAlertSigns);
       window.removeEventListener('open-testimonials-modal', handleOpenTestimonials);
       window.removeEventListener('open-coverage-modal', handleOpenCoverage);
       window.removeEventListener('open-faq-modal', handleOpenFaq);
+      document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
 
@@ -276,127 +287,179 @@ export const FloatingWhatsApp: React.FC = () => {
 
   return (
     <>
-      <div className="fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-50 flex flex-col items-end pointer-events-none">
-        
-        {/* 1. Botão Flutuante: Ambulância (Quando devo chamar o veterinário em casa?) */}
-        <div className="relative pointer-events-auto mb-3 flex items-center group">
-          {/* Tooltip 'Quando Chamar o Veterinário?' exibido ao lado no hover */}
-          <div className="absolute right-full mr-3 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-all duration-200 pointer-events-none translate-x-2 group-hover:translate-x-0 z-10">
-            <div className="relative bg-brand-green-900/95 text-white text-xs sm:text-sm font-bold px-3.5 py-1.5 rounded-full shadow-xl border border-brand-green-700/80 backdrop-blur-md flex items-center gap-1.5">
-              <AlertTriangle className="w-3.5 h-3.5 text-amber-400" />
-              <span>Quando Chamar o Veterinário?</span>
-              <span className="absolute left-full top-1/2 -translate-y-1/2 border-4 border-transparent border-l-brand-green-900/95" />
+      <div
+        ref={quickMenuRef}
+        className="fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-50 flex flex-col items-end pointer-events-none"
+      >
+        {/* Painel Expansível de Atalhos Rápidos */}
+        {isQuickMenuOpen && (
+          <div className="pointer-events-auto mb-3 bg-white/95 backdrop-blur-md rounded-3xl shadow-2xl border border-brand-green-200 p-3 sm:p-4 w-[290px] sm:w-[320px] animate-fadeIn transition-all">
+            <div className="flex items-center justify-between pb-2.5 mb-2 border-b border-brand-green-100">
+              <div className="flex items-center gap-1.5">
+                <Sparkles className="w-4 h-4 text-brand-yellow-500" />
+                <span className="text-xs font-bold uppercase tracking-wider text-brand-green-900 font-display">
+                  Atalhos & Informações
+                </span>
+              </div>
+              <button
+                type="button"
+                onClick={() => setIsQuickMenuOpen(false)}
+                className="p-1 text-gray-400 hover:text-gray-700 rounded-lg hover:bg-gray-100 transition-colors cursor-pointer"
+                aria-label="Fechar atalhos rápidos"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            <div className="flex flex-col gap-1.5">
+              {/* 1. Quando Chamar o Veterinário (Ambulância) */}
+              <button
+                type="button"
+                onClick={() => {
+                  setIsQuickMenuOpen(false);
+                  setIsAlertSignsModalOpen(true);
+                }}
+                className="flex items-center gap-3 p-2.5 rounded-2xl hover:bg-brand-green-50/80 transition-colors text-left group cursor-pointer border border-transparent hover:border-brand-green-100"
+              >
+                <div className="w-10 h-10 rounded-xl bg-white border border-brand-green-200 flex items-center justify-center shrink-0 shadow-xs group-hover:scale-105 transition-transform">
+                  <AmbulanceIcon className="w-7 h-7" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="text-xs sm:text-sm font-bold text-brand-green-900 leading-tight flex items-center gap-1.5">
+                    <span>Quando Chamar?</span>
+                    <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
+                  </div>
+                  <p className="text-[11px] text-gray-500 truncate">
+                    Sinais de alerta & check-ups
+                  </p>
+                </div>
+              </button>
+
+              {/* 2. Regiões e Bairros Atendidos (Rosa dos Ventos com Cachorrinho) */}
+              <button
+                type="button"
+                onClick={() => {
+                  setIsQuickMenuOpen(false);
+                  setIsCoverageModalOpen(true);
+                }}
+                className="flex items-center gap-3 p-2.5 rounded-2xl hover:bg-brand-green-50/80 transition-colors text-left group cursor-pointer border border-transparent hover:border-brand-green-100"
+              >
+                <div className="w-10 h-10 rounded-xl bg-white border border-brand-green-200 flex items-center justify-center shrink-0 shadow-xs group-hover:scale-105 transition-transform">
+                  <CompassDogIcon className="w-7 h-7" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="text-xs sm:text-sm font-bold text-brand-green-900 leading-tight">
+                    Regiões Atendidas
+                  </div>
+                  <p className="text-[11px] text-gray-500 truncate">
+                    Mapa interativo & 48 bairros
+                  </p>
+                </div>
+              </button>
+
+              {/* 3. Tutores e Pets Felizes (Coraçãozinho com Coelhinho) */}
+              <button
+                type="button"
+                onClick={() => {
+                  setIsQuickMenuOpen(false);
+                  setIsTestimonialsModalOpen(true);
+                }}
+                className="flex items-center gap-3 p-2.5 rounded-2xl hover:bg-brand-green-50/80 transition-colors text-left group cursor-pointer border border-transparent hover:border-brand-green-100"
+              >
+                <div className="w-10 h-10 rounded-xl bg-white border border-brand-green-200 flex items-center justify-center shrink-0 shadow-xs group-hover:scale-105 transition-transform">
+                  <HeartBunnyIcon className="w-7 h-7" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="text-xs sm:text-sm font-bold text-brand-green-900 leading-tight flex items-center gap-1.5">
+                    <span>Depoimentos</span>
+                    <span className="text-[10px] bg-rose-100 text-rose-700 font-bold px-1.5 py-0.2 rounded-full">
+                      4.9 ★
+                    </span>
+                  </div>
+                  <p className="text-[11px] text-gray-500 truncate">
+                    Histórias de pets atendidos
+                  </p>
+                </div>
+              </button>
+
+              {/* 4. Perguntas Frequentes (? com Gatinho) */}
+              <button
+                type="button"
+                onClick={() => {
+                  setIsQuickMenuOpen(false);
+                  setIsFaqModalOpen(true);
+                }}
+                className="flex items-center gap-3 p-2.5 rounded-2xl hover:bg-brand-green-50/80 transition-colors text-left group cursor-pointer border border-transparent hover:border-brand-green-100"
+              >
+                <div className="w-10 h-10 rounded-xl bg-white border border-brand-green-200 flex items-center justify-center shrink-0 shadow-xs group-hover:scale-105 transition-transform">
+                  <QuestionCatIcon className="w-7 h-7" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="text-xs sm:text-sm font-bold text-brand-green-900 leading-tight">
+                    Dúvidas Frequentes
+                  </div>
+                  <p className="text-[11px] text-gray-500 truncate">
+                    Vacinas, exames e rotina
+                  </p>
+                </div>
+              </button>
             </div>
           </div>
+        )}
 
-          <button
-            onClick={() => setIsAlertSignsModalOpen(true)}
-            className="w-13 h-13 sm:w-14 sm:h-14 rounded-full bg-white hover:bg-brand-green-50 text-brand-green-900 flex items-center justify-center shadow-lg hover:shadow-xl border-2 border-brand-green-300 hover:border-brand-green-500 transition-all duration-300 hover:scale-105 active:scale-95 group relative cursor-pointer"
-            aria-label="Abrir Quando Devo Chamar o Veterinário em Casa (Ambulância)"
-            title="Quando devo chamar o veterinário em casa?"
-          >
-            <AmbulanceIcon className="w-8 h-8 sm:w-9 sm:h-9 group-hover:scale-110 transition-transform duration-300" />
-            <span className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full border-2 border-white animate-pulse" />
-          </button>
-        </div>
-
-        {/* 2. Botão Flutuante: Coraçãozinho com Coelhinho (Tutores e Pets Felizes) */}
-        <div className="relative pointer-events-auto mb-3 flex items-center group">
-          {/* Tooltip 'Tutores e Pets Felizes' exibido ao lado no hover */}
-          <div className="absolute right-full mr-3 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-all duration-200 pointer-events-none translate-x-2 group-hover:translate-x-0 z-10">
-            <div className="relative bg-brand-green-900/95 text-white text-xs sm:text-sm font-bold px-3.5 py-1.5 rounded-full shadow-xl border border-brand-green-700/80 backdrop-blur-md flex items-center gap-1.5">
-              <Heart className="w-3.5 h-3.5 text-rose-400 fill-rose-400" />
-              <span>Tutores e Pets Felizes</span>
-              <span className="absolute left-full top-1/2 -translate-y-1/2 border-4 border-transparent border-l-brand-green-900/95" />
-            </div>
-          </div>
-
-          <button
-            onClick={() => setIsTestimonialsModalOpen(true)}
-            className="w-13 h-13 sm:w-14 sm:h-14 rounded-full bg-white hover:bg-brand-green-50 text-brand-green-900 flex items-center justify-center shadow-lg hover:shadow-xl border-2 border-brand-green-300 hover:border-brand-green-500 transition-all duration-300 hover:scale-105 active:scale-95 group relative cursor-pointer"
-            aria-label="Abrir Tutores e Pets Felizes (Coraçãozinho com Coelhinho)"
-            title="Tutores e Pets Felizes"
-          >
-            <HeartBunnyIcon className="w-8 h-8 sm:w-9 sm:h-9 group-hover:scale-110 transition-transform duration-300" />
-            <span className="absolute -top-1 -right-1 w-3 h-3 bg-rose-500 rounded-full border-2 border-white" />
-          </button>
-        </div>
-
-        {/* 2. Botão Flutuante: '?' com Gatinho (Perguntas Frequentes) */}
-        <div className="relative pointer-events-auto mb-3 flex items-center group">
-          {/* Tooltip 'Perguntas Frequentes' exibido ao lado no hover */}
-          <div className="absolute right-full mr-3 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-all duration-200 pointer-events-none translate-x-2 group-hover:translate-x-0 z-10">
-            <div className="relative bg-brand-green-900/95 text-white text-xs sm:text-sm font-bold px-3.5 py-1.5 rounded-full shadow-xl border border-brand-green-700/80 backdrop-blur-md flex items-center gap-1.5">
-              <HelpCircle className="w-3.5 h-3.5 text-brand-yellow-300" />
-              <span>Perguntas Frequentes</span>
-              <span className="absolute left-full top-1/2 -translate-y-1/2 border-4 border-transparent border-l-brand-green-900/95" />
-            </div>
-          </div>
-
-          <button
-            onClick={() => setIsFaqModalOpen(true)}
-            className="w-13 h-13 sm:w-14 sm:h-14 rounded-full bg-white hover:bg-brand-green-50 text-brand-green-900 flex items-center justify-center shadow-lg hover:shadow-xl border-2 border-brand-green-300 hover:border-brand-green-500 transition-all duration-300 hover:scale-105 active:scale-95 group relative cursor-pointer"
-            aria-label="Abrir Perguntas Frequentes (? com Gatinho)"
-            title="Perguntas Frequentes"
-          >
-            <QuestionCatIcon className="w-8 h-8 sm:w-9 sm:h-9 group-hover:scale-110 transition-transform duration-300" />
-            <span className="absolute -top-1 -right-1 w-3 h-3 bg-brand-yellow-400 rounded-full border-2 border-white" />
-          </button>
-        </div>
-
-        {/* 3. Botão Flutuante: Rosa dos Ventos com Cachorrinho (Regiões Atendidas) */}
-        <div className="relative pointer-events-auto mb-3 flex items-center group">
-          {/* Tooltip 'Regiões Atendidas' exibido ao lado no hover */}
-          <div className="absolute right-full mr-3 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-all duration-200 pointer-events-none translate-x-2 group-hover:translate-x-0 z-10">
-            <div className="relative bg-brand-green-900/95 text-white text-xs sm:text-sm font-bold px-3.5 py-1.5 rounded-full shadow-xl border border-brand-green-700/80 backdrop-blur-md flex items-center gap-1.5">
-              <MapPin className="w-3.5 h-3.5 text-brand-green-300" />
-              <span>Regiões Atendidas</span>
-              <span className="absolute left-full top-1/2 -translate-y-1/2 border-4 border-transparent border-l-brand-green-900/95" />
-            </div>
-          </div>
-
-          <button
-            onClick={() => setIsCoverageModalOpen(true)}
-            className="w-13 h-13 sm:w-14 sm:h-14 rounded-full bg-white hover:bg-brand-green-50 text-brand-green-900 flex items-center justify-center shadow-lg hover:shadow-xl border-2 border-brand-green-300 hover:border-brand-green-500 transition-all duration-300 hover:scale-105 active:scale-95 group relative cursor-pointer"
-            aria-label="Consultar Regiões e Bairros Atendidos (Rosa dos Ventos com Cachorrinho)"
-            title="Regiões Atendidas"
-          >
-            <CompassDogIcon className="w-8 h-8 sm:w-9 sm:h-9 group-hover:rotate-12 transition-transform duration-300" />
-            <span className="absolute -top-1 -right-1 w-3 h-3 bg-brand-green-600 rounded-full border-2 border-white" />
-          </button>
-        </div>
-
-        {/* 5. Botão Flutuante: Monte seu Atendimento Personalizado (no lugar do botão de agendar no WhatsApp) */}
-        <div className="relative pointer-events-auto flex items-center group">
-          {/* Tooltip 'Monte seu Atendimento Personalizado' exibido ao lado no hover */}
-          <div className="absolute right-full mr-3 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-all duration-200 pointer-events-none translate-x-2 group-hover:translate-x-0 z-10">
-            <div className="relative bg-brand-green-900/95 text-white text-xs sm:text-sm font-bold px-3.5 py-1.5 rounded-full shadow-xl border border-brand-green-700/80 backdrop-blur-md flex items-center gap-1.5">
-              <Sparkles className="w-3.5 h-3.5 text-brand-yellow-300" />
-              <span>Monte seu Atendimento Personalizado</span>
-              <span className="absolute left-full top-1/2 -translate-y-1/2 border-4 border-transparent border-l-brand-green-900/95" />
-            </div>
-          </div>
-
-          {/* Radar ring sutil sincronizado a cada 20s */}
-          <span className="absolute -inset-1 rounded-full bg-whatsapp opacity-0 animate-ring-subtle-20s -z-10 pointer-events-none" />
-
+        {/* Barra de Controles Flutuantes Simplificada */}
+        <div className="flex items-center gap-2 pointer-events-auto">
+          {/* Botão de Atalhos Rápidos */}
           <button
             type="button"
-            onClick={() => setIsQuoteModalOpen(true)}
-            className="flex items-center gap-2.5 bg-whatsapp hover:bg-whatsapp-hover text-white py-3.5 px-4 sm:px-5 rounded-full shadow-2xl transition-all duration-300 hover:scale-105 active:scale-95 group animate-blink-subtle-20s cursor-pointer border border-whatsapp-hover"
-            aria-label="Abrir janela Monte seu Atendimento Personalizado"
-            title="Monte seu Atendimento Personalizado"
+            onClick={() => setIsQuickMenuOpen(!isQuickMenuOpen)}
+            className={`flex items-center gap-1.5 py-2.5 px-3.5 sm:px-4 rounded-full shadow-lg border transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer backdrop-blur-md ${
+              isQuickMenuOpen
+                ? 'bg-brand-green-900 text-white border-brand-green-700 shadow-xl'
+                : 'bg-white/95 text-brand-green-900 border-brand-green-200 hover:border-brand-green-400 hover:bg-white'
+            }`}
+            aria-label={isQuickMenuOpen ? 'Fechar atalhos rápidos' : 'Abrir atalhos rápidos'}
+            title="Atalhos e Informações Rápidas"
           >
-            <div className="relative">
-              <MessageCircle className="w-7 h-7 fill-white text-white" />
-              <span className="absolute -top-1 -right-1 w-3 h-3 bg-white rounded-full border-2 border-whatsapp flex items-center justify-center">
-                <span className="w-1.5 h-1.5 bg-whatsapp rounded-full animate-pulse" />
-              </span>
-            </div>
-            <span className="hidden sm:inline-block font-display font-bold text-sm tracking-wide text-white pr-1">
-              Monte seu Atendimento
+            <Sparkles className={`w-4 h-4 transition-transform duration-300 ${isQuickMenuOpen ? 'rotate-90 text-brand-yellow-400' : 'text-brand-yellow-500'}`} />
+            <span className="text-xs font-bold font-display">
+              {isQuickMenuOpen ? 'Fechar' : 'Atalhos'}
             </span>
+            <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${isQuickMenuOpen ? 'rotate-180' : ''}`} />
           </button>
+
+          {/* Botão Principal: Monte seu Atendimento Personalizado */}
+          <div className="relative flex items-center group">
+            {/* Tooltip 'Monte seu Atendimento Personalizado' exibido ao lado no hover */}
+            <div className="absolute right-full mr-3 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-all duration-200 pointer-events-none translate-x-2 group-hover:translate-x-0 z-10 hidden sm:block">
+              <div className="relative bg-brand-green-900/95 text-white text-xs sm:text-sm font-bold px-3.5 py-1.5 rounded-full shadow-xl border border-brand-green-700/80 backdrop-blur-md flex items-center gap-1.5">
+                <Sparkles className="w-3.5 h-3.5 text-brand-yellow-300" />
+                <span>Monte seu Atendimento Personalizado</span>
+                <span className="absolute left-full top-1/2 -translate-y-1/2 border-4 border-transparent border-l-brand-green-900/95" />
+              </div>
+            </div>
+
+            {/* Radar ring sutil sincronizado a cada 20s */}
+            <span className="absolute -inset-1 rounded-full bg-whatsapp opacity-0 animate-ring-subtle-20s -z-10 pointer-events-none" />
+
+            <button
+              type="button"
+              onClick={() => setIsQuoteModalOpen(true)}
+              className="flex items-center gap-2 sm:gap-2.5 bg-whatsapp hover:bg-whatsapp-hover text-white py-3 px-4 sm:px-5 rounded-full shadow-2xl transition-all duration-300 hover:scale-105 active:scale-95 group animate-blink-subtle-20s cursor-pointer border border-whatsapp-hover"
+              aria-label="Abrir janela Monte seu Atendimento Personalizado"
+              title="Monte seu Atendimento Personalizado"
+            >
+              <div className="relative">
+                <MessageCircle className="w-6 h-6 sm:w-7 sm:h-7 fill-white text-white" />
+                <span className="absolute -top-1 -right-1 w-3 h-3 bg-white rounded-full border-2 border-whatsapp flex items-center justify-center">
+                  <span className="w-1.5 h-1.5 bg-whatsapp rounded-full animate-pulse" />
+                </span>
+              </div>
+              <span className="hidden xs:inline-block sm:inline-block font-display font-bold text-xs sm:text-sm tracking-wide text-white pr-0.5">
+                Monte seu Atendimento
+              </span>
+            </button>
+          </div>
         </div>
 
       </div>

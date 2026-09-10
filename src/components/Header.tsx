@@ -18,11 +18,7 @@ export const Header: React.FC = () => {
     { label: 'Início', href: '#inicio' },
     { label: 'Vantagens', href: '#vantagens' },
     { label: 'Serviços', href: '#servicos' },
-    { label: 'Monte seu Atendimento', href: '#simulador' },
-    { label: 'Área de Atendimento', href: '#cobertura' },
     { label: 'Quem Somos', href: '#sobre' },
-    { label: 'Depoimentos', href: '#depoimentos' },
-    { label: 'Dúvidas', href: '#faq' },
   ];
 
   const handleNavClick = (href: string, e: React.MouseEvent) => {
@@ -128,7 +124,17 @@ export const Header: React.FC = () => {
                 {link.label}
               </a>
             ))}
-            <div className="pt-3 mt-1 border-t border-brand-green-100">
+            <div className="pt-3 mt-1 border-t border-brand-green-100 flex flex-col gap-2">
+              <button
+                type="button"
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  window.dispatchEvent(new CustomEvent('open-quote-modal'));
+                }}
+                className="w-full flex items-center justify-center gap-2 bg-brand-green-100 hover:bg-brand-green-200 text-brand-green-900 font-bold py-2.5 px-4 rounded-xl transition-all text-sm cursor-pointer"
+              >
+                <span>✨ Monte seu Atendimento</span>
+              </button>
               <a
                 href={createWhatsAppLink('Olá! Gostaria de tirar uma dúvida sobre atendimento veterinário em casa.')}
                 target="_blank"
