@@ -404,7 +404,7 @@ export const FloatingWhatsApp: React.FC = () => {
           <button
             type="button"
             onClick={() => setIsQuickMenuOpen(!isQuickMenuOpen)}
-            className={`flex items-center gap-1.5 py-2 px-3.5 sm:px-4 rounded-full shadow-md border transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer backdrop-blur-md ${
+            className={`min-h-[44px] min-w-[44px] flex items-center justify-center gap-1.5 py-2 px-3.5 sm:px-4 rounded-full shadow-md border transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer backdrop-blur-md ${
               isQuickMenuOpen
                 ? 'bg-brand-green-900 text-white border-brand-green-700 shadow-xl'
                 : 'bg-white/95 text-brand-green-900 border-brand-green-200 hover:border-brand-green-400 hover:bg-white'
@@ -431,19 +431,19 @@ export const FloatingWhatsApp: React.FC = () => {
             </div>
 
             {/* Radar ring sutil sincronizado a cada 20s */}
-            <span className="absolute -inset-1 rounded-full bg-whatsapp opacity-0 animate-ring-subtle-20s -z-10 pointer-events-none" />
+            <span className="absolute -inset-1 rounded-full bg-[#166534] opacity-0 animate-ring-subtle-20s -z-10 pointer-events-none" />
 
             <button
               type="button"
               onClick={() => setIsQuoteModalOpen(true)}
-              className="flex items-center gap-2 sm:gap-2.5 bg-whatsapp hover:bg-whatsapp-hover text-white py-3 px-4 sm:px-5 rounded-full shadow-2xl transition-all duration-300 hover:scale-105 active:scale-95 group animate-blink-subtle-20s cursor-pointer border border-whatsapp-hover"
+              className="flex items-center gap-2 sm:gap-2.5 bg-[#166534] hover:bg-[#14532d] text-white py-3 px-4 sm:px-5 rounded-full shadow-2xl transition-all duration-300 hover:scale-105 active:scale-95 group animate-blink-subtle-20s cursor-pointer border border-[#14532d] min-h-[48px]"
               aria-label="Abrir janela Monte seu Atendimento Personalizado"
               title="Monte seu Atendimento Personalizado"
             >
               <div className="relative">
                 <MessageCircle className="w-6 h-6 sm:w-7 sm:h-7 fill-white text-white" />
-                <span className="absolute -top-1 -right-1 w-3 h-3 bg-white rounded-full border-2 border-whatsapp flex items-center justify-center">
-                  <span className="w-1.5 h-1.5 bg-whatsapp rounded-full animate-pulse" />
+                <span className="absolute -top-1 -right-1 w-3 h-3 bg-white rounded-full border-2 border-[#166534] flex items-center justify-center">
+                  <span className="w-1.5 h-1.5 bg-[#166534] rounded-full animate-pulse" />
                 </span>
               </div>
               <span className="hidden xs:inline-block sm:inline-block font-display font-bold text-xs sm:text-sm tracking-wide text-white pr-0.5">
@@ -555,7 +555,7 @@ export const FloatingWhatsApp: React.FC = () => {
                     href={createWhatsAppLink(`Olá! Gostaria de agendar um atendimento veterinário domiciliar no bairro ${selectedNeighborhood} em Peruíbe.`)}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-whatsapp hover:bg-whatsapp-hover text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow-pill transition-all cursor-pointer"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#166534] hover:bg-[#14532d] text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow-pill transition-all cursor-pointer min-h-[44px]"
                   >
                     <MessageCircle className="w-3.5 h-3.5 fill-white" />
                     <span>Agendar Consulta</span>
@@ -574,14 +574,14 @@ export const FloatingWhatsApp: React.FC = () => {
                   href={createWhatsAppLink('Olá! Gostaria de confirmar se atendem no meu bairro em Peruíbe e agendar uma visita.')}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 bg-whatsapp hover:bg-whatsapp-hover text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow-pill transition-all"
+                  className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 bg-[#166534] hover:bg-[#14532d] text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow-pill transition-all min-h-[44px]"
                 >
                   <MessageCircle className="w-3.5 h-3.5 fill-white" />
                   <span>Consultar no WhatsApp</span>
                 </a>
                 <button
                   onClick={() => setIsCoverageModalOpen(false)}
-                  className="px-3 py-2.5 text-xs font-semibold text-gray-600 hover:text-gray-800 bg-gray-100 hover:bg-gray-200 rounded-xl transition-colors cursor-pointer"
+                  className="min-h-[44px] px-3 py-2.5 text-xs font-semibold text-gray-600 hover:text-gray-800 bg-gray-100 hover:bg-gray-200 rounded-xl transition-colors cursor-pointer"
                 >
                   Fechar
                 </button>
@@ -701,14 +701,14 @@ export const FloatingWhatsApp: React.FC = () => {
                   href={createWhatsAppLink('Olá! Tenho uma dúvida sobre o atendimento veterinário domiciliar em Peruíbe.')}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 bg-whatsapp hover:bg-whatsapp-hover text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow-pill transition-all"
+                  className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 bg-[#166534] hover:bg-[#14532d] text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow-pill transition-all min-h-[44px]"
                 >
                   <MessageCircle className="w-3.5 h-3.5 fill-white" />
                   <span>Tirar Dúvida no WhatsApp</span>
                 </a>
                 <button
                   onClick={() => setIsFaqModalOpen(false)}
-                  className="px-3 py-2.5 text-xs font-semibold text-gray-600 hover:text-gray-800 bg-gray-100 hover:bg-gray-200 rounded-xl transition-colors cursor-pointer"
+                  className="min-h-[44px] px-3 py-2.5 text-xs font-semibold text-gray-600 hover:text-gray-800 bg-gray-100 hover:bg-gray-200 rounded-xl transition-colors cursor-pointer"
                 >
                   Fechar
                 </button>
@@ -807,14 +807,14 @@ export const FloatingWhatsApp: React.FC = () => {
                   href={createWhatsAppLink('Olá! Li os depoimentos de outros tutores no site e gostaria de agendar uma consulta para meu pet.')}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 bg-whatsapp hover:bg-whatsapp-hover text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow-pill transition-all"
+                  className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 bg-[#166534] hover:bg-[#14532d] text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow-pill transition-all min-h-[44px]"
                 >
                   <MessageCircle className="w-3.5 h-3.5 fill-white" />
                   <span>Agendar no WhatsApp</span>
                 </a>
                 <button
                   onClick={() => setIsTestimonialsModalOpen(false)}
-                  className="px-3 py-2.5 text-xs font-semibold text-gray-600 hover:text-gray-800 bg-gray-100 hover:bg-gray-200 rounded-xl transition-colors cursor-pointer"
+                  className="min-h-[44px] px-3 py-2.5 text-xs font-semibold text-gray-600 hover:text-gray-800 bg-gray-100 hover:bg-gray-200 rounded-xl transition-colors cursor-pointer"
                 >
                   Fechar
                 </button>
@@ -940,14 +940,14 @@ export const FloatingWhatsApp: React.FC = () => {
                   href={createWhatsAppLink('Olá! Notei uma alteração no meu pet e gostaria de agendar uma avaliação preventiva em casa.')}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 bg-whatsapp hover:bg-whatsapp-hover text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow-pill transition-all"
+                  className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 bg-[#166534] hover:bg-[#14532d] text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow-pill transition-all min-h-[44px]"
                 >
                   <MessageCircle className="w-3.5 h-3.5 fill-white" />
                   <span>Agendar Avaliação no WhatsApp</span>
                 </a>
                 <button
                   onClick={() => setIsAlertSignsModalOpen(false)}
-                  className="px-3 py-2.5 text-xs font-semibold text-gray-600 hover:text-gray-800 bg-gray-100 hover:bg-gray-200 rounded-xl transition-colors cursor-pointer"
+                  className="min-h-[44px] px-3 py-2.5 text-xs font-semibold text-gray-600 hover:text-gray-800 bg-gray-100 hover:bg-gray-200 rounded-xl transition-colors cursor-pointer"
                 >
                   Fechar
                 </button>

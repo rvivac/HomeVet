@@ -88,7 +88,7 @@ export const Header: React.FC = () => {
             href={createWhatsAppLink('Olá! Gostaria de agendar um atendimento veterinário em casa.')}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 sm:gap-2 bg-whatsapp hover:bg-whatsapp-hover text-white text-xs sm:text-sm font-bold px-3 py-2 sm:px-4 sm:py-2.5 rounded-full shadow-pill transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
+            className="inline-flex items-center gap-1.5 sm:gap-2 bg-[#166534] hover:bg-[#14532d] text-white text-xs sm:text-sm font-bold px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-full shadow-md transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 cursor-pointer min-h-[44px]"
             aria-label="Agendar consulta diretamente pelo WhatsApp"
           >
             <MessageCircle className="w-4 h-4 fill-white" />
@@ -99,7 +99,7 @@ export const Header: React.FC = () => {
           {/* Mobile Menu Toggle */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-2 rounded-xl text-brand-green-900 hover:bg-brand-green-100 transition-colors focus:outline-none cursor-pointer"
+            className="lg:hidden p-2.5 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-xl text-brand-green-900 hover:bg-brand-green-100 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-green-400 cursor-pointer"
             aria-label={mobileMenuOpen ? 'Fechar menu' : 'Abrir menu'}
           >
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -119,7 +119,7 @@ export const Header: React.FC = () => {
                   setMobileMenuOpen(false);
                   handleNavClick(link.href, e);
                 }}
-                className="text-base font-semibold text-[#2D3748] hover:text-brand-green-800 py-2.5 px-3 rounded-xl hover:bg-brand-green-50 transition-colors cursor-pointer"
+                className="text-base font-semibold text-[#1F2937] hover:text-brand-green-900 py-3 px-3 rounded-xl hover:bg-brand-green-50 transition-colors cursor-pointer min-h-[44px] flex items-center"
               >
                 {link.label}
               </a>
@@ -131,7 +131,7 @@ export const Header: React.FC = () => {
                   setMobileMenuOpen(false);
                   window.dispatchEvent(new CustomEvent('open-quote-modal'));
                 }}
-                className="w-full flex items-center justify-center gap-2 bg-brand-green-100 hover:bg-brand-green-200 text-brand-green-900 font-bold py-2.5 px-4 rounded-xl transition-all text-sm cursor-pointer"
+                className="w-full flex items-center justify-center gap-2 bg-brand-green-100 hover:bg-brand-green-200 text-brand-green-950 font-bold py-3 px-4 rounded-xl transition-all text-sm cursor-pointer min-h-[44px]"
               >
                 <span>✨ Monte seu Atendimento</span>
               </button>
@@ -140,7 +140,7 @@ export const Header: React.FC = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setMobileMenuOpen(false)}
-                className="w-full flex items-center justify-center gap-2 bg-whatsapp hover:bg-whatsapp-hover text-white font-bold py-3 px-4 rounded-2xl shadow-pill transition-all text-center"
+                className="w-full flex items-center justify-center gap-2 bg-[#166534] hover:bg-[#14532d] text-white font-bold py-3 px-4 rounded-2xl shadow-md transition-all text-center min-h-[44px]"
               >
                 <MessageCircle className="w-5 h-5 fill-white" />
                 <span>Chamar no WhatsApp</span>

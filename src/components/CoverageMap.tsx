@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import L from 'leaflet';
+import type * as LeafletType from 'leaflet';
 import { Navigation, ExternalLink } from 'lucide-react';
 
 // Coordenadas aproximadas dos pontos extremos da área de cobertura exibida no Google
@@ -24,30 +24,38 @@ export const CoverageMap: React.FC<CoverageMapProps> = ({
   height = '320px',
 }) => {
   const mapContainerRef = useRef<HTMLDivElement>(null);
-  const mapInstanceRef = useRef<L.Map | null>(null);
-  const tileLayerRef = useRef<L.TileLayer | null>(null);
+  const mapInstanceRef = useRef<LeafletType.Map | null>(null);
+  const tileLayerRef = useRef<LeafletType.TileLayer | null>(null);
+  const leafletLibRef = useRef<typeof LeafletType | null>(null);
   const [mapType, setMapType] = useState<'roadmap' | 'satellite'>('roadmap');
 
   useEffect(() => {
     if (!mapContainerRef.current) return;
+    let isCancelled = false;
 
-    // Destrói instância anterior se houver
-    if (mapInstanceRef.current) {
-      mapInstanceRef.current.remove();
-      mapInstanceRef.current = null;
-    }
+    // Carrega o Leaflet dinamicamente apenas no ambiente de navegador
+    import('leaflet').then((leafletModule) => {
+      if (isCancelled || !mapContainerRef.current) return;
+      const L = (leafletModule.default || leafletModule) as typeof LeafletType;
+      leafletLibRef.current = L;
 
-    // Inicializa o mapa Leaflet
-    const map = L.map(mapContainerRef.current, {
-      center: [-24.27, -46.9],
-      zoom: 10,
-      minZoom: 9,
-      maxZoom: 18,
-      zoomControl: true,
-      attributionControl: false,
-    });
+      // Destrói instância anterior se houver
+      if (mapInstanceRef.current) {
+        mapInstanceRef.current.remove();
+        mapInstanceRef.current = null;
+      }
 
-    mapInstanceRef.current = map;
+      // Inicializa o mapa Leaflet
+      const map = L.map(mapContainerRef.current, {
+        center: [-24.27, -46.9],
+        zoom: 10,
+        minZoom: 9,
+        maxZoom: 18,
+        zoomControl: true,
+        attributionControl: false,
+      });
+
+      mapInstanceRef.current = map;
 
     // Adiciona camada de tiles do Google Maps (Roadmap ou Satellite)
     const getTileUrl = (type: 'roadmap' | 'satellite') => {
@@ -101,14 +109,16 @@ export const CoverageMap: React.FC<CoverageMapProps> = ({
       </div>
     `);
 
-    // Invalida o tamanho após a animação de montagem do modal
-    const timer = setTimeout(() => {
-      map.invalidateSize();
-      map.fitBounds(polygon.getBounds(), { padding: [25, 25] });
-    }, 250);
+      // Invalida o tamanho após a animação de montagem do modal
+      setTimeout(() => {
+        if (isCancelled || !mapInstanceRef.current) return;
+        map.invalidateSize();
+        map.fitBounds(polygon.getBounds(), { padding: [25, 25] });
+      }, 250);
+    });
 
     return () => {
-      clearTimeout(timer);
+      isCancelled = true;
       if (mapInstanceRef.current) {
         mapInstanceRef.current.remove();
         mapInstanceRef.current = null;
@@ -131,7 +141,8 @@ export const CoverageMap: React.FC<CoverageMapProps> = ({
 
   // Recentraliza na área
   const handleRecenter = () => {
-    if (!mapInstanceRef.current) return;
+    if (!mapInstanceRef.current || !leafletLibRef.current) return;
+    const L = leafletLibRef.current;
     const polygon = L.polygon(COVERAGE_POLYGON);
     mapInstanceRef.current.fitBounds(polygon.getBounds(), { padding: [25, 25] });
   };

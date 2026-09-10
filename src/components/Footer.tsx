@@ -30,7 +30,7 @@ export const Footer: React.FC = () => {
                 href={CLINIC_CONFIG.instagramUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-xl bg-brand-green-800 hover:bg-brand-green-700 flex items-center justify-center transition-colors text-brand-green-100"
+                className="w-11 h-11 min-w-[44px] min-h-[44px] rounded-xl bg-brand-green-800 hover:bg-brand-green-700 flex items-center justify-center transition-colors text-brand-green-100"
                 aria-label="Instagram @home_vetdomicilio"
                 title="Instagram @home_vetdomicilio"
               >
@@ -48,7 +48,7 @@ export const Footer: React.FC = () => {
                 href={CLINIC_CONFIG.facebookUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-xl bg-brand-green-800 hover:bg-brand-green-700 flex items-center justify-center transition-colors text-brand-green-100"
+                className="w-11 h-11 min-w-[44px] min-h-[44px] rounded-xl bg-brand-green-800 hover:bg-brand-green-700 flex items-center justify-center transition-colors text-brand-green-100"
                 aria-label="Página do Facebook"
                 title="Página do Facebook"
               >
@@ -64,7 +64,7 @@ export const Footer: React.FC = () => {
                 href={CLINIC_CONFIG.linktreeUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-xl bg-brand-green-800 hover:bg-brand-green-700 flex items-center justify-center transition-colors text-brand-green-100 text-xs font-bold"
+                className="w-11 h-11 min-w-[44px] min-h-[44px] rounded-xl bg-brand-green-800 hover:bg-brand-green-700 flex items-center justify-center transition-colors text-brand-green-100 text-xs font-bold"
                 aria-label="Linktree da Home.Vet"
                 title="Linktree da Home.Vet"
               >
@@ -75,14 +75,14 @@ export const Footer: React.FC = () => {
                 href={createWhatsAppLink()}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-xl bg-whatsapp hover:bg-whatsapp-hover flex items-center justify-center transition-colors text-white shadow-pill"
+                className="w-11 h-11 min-w-[44px] min-h-[44px] rounded-xl bg-[#166534] hover:bg-[#14532d] flex items-center justify-center transition-colors text-white shadow-pill"
                 aria-label="WhatsApp da Home Vet"
                 title="Falar no WhatsApp"
               >
                 <MessageCircle className="w-5 h-5 fill-white" />
               </a>
 
-              <span className="text-xs text-brand-green-200 font-medium ml-1">
+              <span className="text-xs text-brand-green-100 font-medium ml-1">
                 {CLINIC_CONFIG.displayPhone}
               </span>
             </div>
@@ -94,18 +94,18 @@ export const Footer: React.FC = () => {
               <h4 className="font-display font-bold text-sm text-white uppercase tracking-wider mb-2.5">
                 Navegação
               </h4>
-              <ul className="space-y-1.5 text-xs sm:text-sm text-brand-green-100/70">
+              <ul className="space-y-2 text-xs sm:text-sm text-brand-green-100">
                 <li>
-                  <a href="#inicio" className="hover:text-white transition-colors">Início</a>
+                  <a href="#inicio" className="hover:text-white hover:underline transition-colors block py-0.5">Início</a>
                 </li>
                 <li>
-                  <a href="#vantagens" className="hover:text-white transition-colors">Vantagens no Lar</a>
+                  <a href="#vantagens" className="hover:text-white hover:underline transition-colors block py-0.5">Vantagens no Lar</a>
                 </li>
                 <li>
-                  <a href="#sobre" className="hover:text-white transition-colors">Quem Somos (Equipe)</a>
+                  <a href="#sobre" className="hover:text-white hover:underline transition-colors block py-0.5">Quem Somos (Equipe)</a>
                 </li>
                 <li>
-                  <a href="#servicos" className="hover:text-white transition-colors">Nossos Serviços</a>
+                  <a href="#servicos" className="hover:text-white hover:underline transition-colors block py-0.5">Nossos Serviços</a>
                 </li>
               </ul>
             </div>
@@ -114,12 +114,12 @@ export const Footer: React.FC = () => {
               <h4 className="font-display font-bold text-sm text-white uppercase tracking-wider mb-2.5">
                 Atalhos & Informações
               </h4>
-              <ul className="space-y-1.5 text-xs sm:text-sm text-brand-green-100/70">
+              <ul className="space-y-2 text-xs sm:text-sm text-brand-green-100">
                 <li>
                   <button
                     type="button"
                     onClick={() => window.dispatchEvent(new CustomEvent('open-quote-modal'))}
-                    className="hover:text-white transition-colors text-left cursor-pointer flex items-center gap-1.5"
+                    className="hover:text-white hover:underline transition-colors text-left cursor-pointer flex items-center gap-1.5 py-0.5"
                   >
                     <span>✨ Monte seu Atendimento</span>
                   </button>
@@ -128,7 +128,7 @@ export const Footer: React.FC = () => {
                   <button
                     type="button"
                     onClick={() => window.dispatchEvent(new CustomEvent('open-coverage-modal'))}
-                    className="hover:text-white transition-colors text-left cursor-pointer flex items-center gap-1.5"
+                    className="hover:text-white hover:underline transition-colors text-left cursor-pointer flex items-center gap-1.5 py-0.5"
                   >
                     <span>🧭 Regiões & Bairros Atendidos</span>
                   </button>
@@ -137,7 +137,7 @@ export const Footer: React.FC = () => {
                   <button
                     type="button"
                     onClick={() => window.dispatchEvent(new CustomEvent('open-alert-signs-modal'))}
-                    className="hover:text-white transition-colors text-left cursor-pointer flex items-center gap-1.5"
+                    className="hover:text-white hover:underline transition-colors text-left cursor-pointer flex items-center gap-1.5 py-0.5"
                   >
                     <span>🚑 Quando Chamar o Veterinário?</span>
                   </button>
@@ -146,7 +146,7 @@ export const Footer: React.FC = () => {
                   <button
                     type="button"
                     onClick={() => window.dispatchEvent(new CustomEvent('open-testimonials-modal'))}
-                    className="hover:text-white transition-colors text-left cursor-pointer flex items-center gap-1.5"
+                    className="hover:text-white hover:underline transition-colors text-left cursor-pointer flex items-center gap-1.5 py-0.5"
                   >
                     <span>⭐ Tutores e Pets Felizes</span>
                   </button>
@@ -155,7 +155,7 @@ export const Footer: React.FC = () => {
                   <button
                     type="button"
                     onClick={() => window.dispatchEvent(new CustomEvent('open-faq-modal'))}
-                    className="hover:text-white transition-colors text-left cursor-pointer flex items-center gap-1.5"
+                    className="hover:text-white hover:underline transition-colors text-left cursor-pointer flex items-center gap-1.5 py-0.5"
                   >
                     <span>❓ Dúvidas Frequentes</span>
                   </button>
@@ -170,9 +170,9 @@ export const Footer: React.FC = () => {
               Equipe Técnica e Atendimento
             </h4>
 
-            <div className="space-y-3 text-xs sm:text-sm text-brand-green-100/80">
+            <div className="space-y-3 text-xs sm:text-sm text-brand-green-100">
               <div className="flex items-start gap-2.5">
-                <ShieldCheck className="w-4 h-4 text-whatsapp shrink-0 mt-0.5" />
+                <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
                 <div className="space-y-2.5">
                   <div>
                     <strong className="text-white block font-display text-sm font-bold">
@@ -216,7 +216,7 @@ export const Footer: React.FC = () => {
             </div>
 
             {/* Emergency note */}
-            <div className="p-3.5 rounded-2xl bg-brand-green-800/60 border border-brand-green-700/60 text-xs text-brand-green-200/90 leading-relaxed">
+            <div className="p-3.5 rounded-2xl bg-brand-green-800/60 border border-brand-green-700/60 text-xs text-brand-green-100 leading-relaxed">
               <strong className="text-brand-yellow-300 block mb-1">Aviso Importante sobre Emergências:</strong>
               {CLINIC_CONFIG.emergencyDisclaimer}
             </div>
@@ -225,16 +225,16 @@ export const Footer: React.FC = () => {
         </div>
 
         {/* Bottom copyright & Credits */}
-        <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-brand-green-200/70">
+        <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-brand-green-100">
           <p className="text-center md:text-left">
             © {new Date().getFullYear()} {CLINIC_CONFIG.name}. Todos os direitos reservados. {CLINIC_CONFIG.crmv}.
           </p>
           <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 text-center md:text-right">
-            <span className="text-brand-green-100/90 font-medium">
+            <span className="text-brand-green-100 font-medium">
               Design &amp; Desenvolvimento · 2026 Rvivac Guild LTDA
             </span>
-            <span className="hidden sm:inline text-brand-green-700/80">•</span>
-            <p className="flex items-center justify-center gap-1 text-brand-green-200/60">
+            <span className="hidden sm:inline text-brand-green-600">•</span>
+            <p className="flex items-center justify-center gap-1 text-brand-green-200">
               Feito com <Heart className="w-3.5 h-3.5 text-rose-400 fill-rose-400" /> para os pets e tutores de Peruíbe e região.
             </p>
           </div>
