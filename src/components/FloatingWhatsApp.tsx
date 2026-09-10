@@ -930,30 +930,6 @@ export const FloatingWhatsApp: React.FC = () => {
                   </div>
                 ))
               )}
-
-              {/* End of list Google Maps Link Card */}
-              <div className="bg-gradient-to-br from-brand-bg to-brand-green-50 rounded-2xl p-5 border-2 border-dashed border-brand-green-200 text-center space-y-3">
-                <div className="w-10 h-10 rounded-full bg-white shadow-xs mx-auto flex items-center justify-center border border-gray-100">
-                  <Star className="w-5 h-5 text-brand-yellow-400 fill-brand-yellow-400" />
-                </div>
-                <div>
-                  <h4 className="font-display font-bold text-sm sm:text-base text-brand-green-900">
-                    23 Avaliações Reais com Nota 5.0 no Google Maps
-                  </h4>
-                  <p className="text-xs text-gray-600 max-w-md mx-auto leading-relaxed mt-1">
-                    Confira todas as 23 avaliações na íntegra, com fotos e relatos detalhados dos tutores, diretamente no perfil verificado da Home.Vet no Google.
-                  </p>
-                </div>
-                <a
-                  href={CLINIC_CONFIG.googleReviewsUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 bg-[#166534] hover:bg-[#14532d] text-white text-xs font-bold px-5 py-2.5 rounded-xl shadow-pill transition-all cursor-pointer"
-                >
-                  <span>Abrir todas as 23 avaliações no Google Maps</span>
-                  <ExternalLink className="w-3.5 h-3.5" />
-                </a>
-              </div>
             </div>
 
             {/* Modal Footer with Direct WhatsApp Action */}
