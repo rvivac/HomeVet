@@ -17,8 +17,8 @@ export const Header: React.FC = () => {
   const navLinks = [
     { label: 'Início', href: '#inicio' },
     { label: 'Vantagens', href: '#vantagens' },
-    { label: 'Serviços', href: '#servicos' },
     { label: 'Quem Somos', href: '#sobre' },
+    { label: 'Serviços', href: '#servicos' },
   ];
 
   const handleNavClick = (href: string, e: React.MouseEvent) => {

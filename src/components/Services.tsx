@@ -57,7 +57,7 @@ export const Services: React.FC = () => {
   };
 
   return (
-    <section id="servicos" className="py-20 bg-white relative">
+    <section id="servicos" className="py-20 bg-white relative border-t border-brand-green-100/70">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}

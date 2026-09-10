@@ -25,11 +25,11 @@ export const App: React.FC = () => {
         {/* Why Choose Home Veterinary Care */}
         <WhyHomeCare />
 
+        {/* Credibility & Technical Profile of Dr. Renato Pegoretti (CRMV-SP 45.390) - Quem Somos */}
+        <VetProfile />
+
         {/* Home Services in Cards */}
         <Services />
-
-        {/* Credibility & Technical Profile of Dr. Renato Pegoretti (CRMV-SP 45.390) */}
-        <VetProfile />
       </main>
 
       {/* Footer with CRMV, Instagram, Facebook, Linktree & Policies */}

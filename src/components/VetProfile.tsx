@@ -4,7 +4,7 @@ import { CLINIC_CONFIG, createWhatsAppLink } from '../data/content';
 
 export const VetProfile: React.FC = () => {
   return (
-    <section id="sobre" className="py-20 bg-brand-bg relative overflow-hidden">
+    <section id="sobre" className="py-20 bg-brand-cream relative overflow-hidden border-t border-brand-green-100/70">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
