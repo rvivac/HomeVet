@@ -66,7 +66,7 @@ export const Testimonials: React.FC = () => {
         {/* Trust banner */}
         <div className="max-w-2xl mx-auto text-center bg-white rounded-2xl py-4 px-6 border border-brand-green-100 shadow-xs flex items-center justify-center gap-2 text-xs sm:text-sm text-gray-600">
           <Sparkles className="w-4 h-4 text-brand-yellow-500" />
-          <span>Avaliação média de <strong>4.9 / 5.0 estrelas</strong> no atendimento domiciliar</span>
+          <span>Avaliação de <strong>5 estrelas (5.0 / 5.0)</strong> no atendimento domiciliar</span>
         </div>
 
       </div>

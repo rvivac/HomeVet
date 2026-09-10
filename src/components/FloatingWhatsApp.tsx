@@ -373,7 +373,7 @@ export const FloatingWhatsApp: React.FC = () => {
                   <div className="text-xs sm:text-sm font-bold text-brand-green-900 leading-tight flex items-center gap-1.5">
                     <span>Depoimentos</span>
                     <span className="text-[10px] bg-rose-100 text-rose-700 font-bold px-1.5 py-0.2 rounded-full">
-                      4.9 ★
+                      5.0 ★
                     </span>
                   </div>
                   <p className="text-[11px] text-gray-500 truncate">
@@ -748,7 +748,7 @@ export const FloatingWhatsApp: React.FC = () => {
                   <h3 className="font-display font-bold text-xl text-brand-green-900 leading-tight flex items-center gap-2">
                     Tutores e Pets Felizes
                     <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-rose-100 text-rose-800 border border-rose-200">
-                      4.9 ★★★★★
+                      5.0 ★★★★★
                     </span>
                   </h3>
                   <p className="text-xs text-brand-green-700 font-medium">
