@@ -407,13 +407,13 @@ export const FloatingWhatsApp: React.FC = () => {
           </div>
         )}
 
-        {/* Barra de Controles Flutuantes Simplificada */}
-        <div className="flex items-center gap-2 pointer-events-auto">
-          {/* Botão de Atalhos Rápidos */}
+        {/* Controles Flutuantes: Atalhos ACIMA de Monte seu Atendimento */}
+        <div className="flex flex-col items-end gap-2.5 pointer-events-auto">
+          {/* Botão de Atalhos Rápidos (Acima) */}
           <button
             type="button"
             onClick={() => setIsQuickMenuOpen(!isQuickMenuOpen)}
-            className={`flex items-center gap-1.5 py-2.5 px-3.5 sm:px-4 rounded-full shadow-lg border transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer backdrop-blur-md ${
+            className={`flex items-center gap-1.5 py-2 px-3.5 sm:px-4 rounded-full shadow-md border transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer backdrop-blur-md ${
               isQuickMenuOpen
                 ? 'bg-brand-green-900 text-white border-brand-green-700 shadow-xl'
                 : 'bg-white/95 text-brand-green-900 border-brand-green-200 hover:border-brand-green-400 hover:bg-white'
@@ -421,14 +421,14 @@ export const FloatingWhatsApp: React.FC = () => {
             aria-label={isQuickMenuOpen ? 'Fechar atalhos rápidos' : 'Abrir atalhos rápidos'}
             title="Atalhos e Informações Rápidas"
           >
-            <Sparkles className={`w-4 h-4 transition-transform duration-300 ${isQuickMenuOpen ? 'rotate-90 text-brand-yellow-400' : 'text-brand-yellow-500'}`} />
+            <Sparkles className={`w-3.5 h-3.5 transition-transform duration-300 ${isQuickMenuOpen ? 'rotate-90 text-brand-yellow-400' : 'text-brand-yellow-500'}`} />
             <span className="text-xs font-bold font-display">
               {isQuickMenuOpen ? 'Fechar' : 'Atalhos'}
             </span>
             <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${isQuickMenuOpen ? 'rotate-180' : ''}`} />
           </button>
 
-          {/* Botão Principal: Monte seu Atendimento Personalizado */}
+          {/* Botão Principal: Monte seu Atendimento Personalizado (Abaixo) */}
           <div className="relative flex items-center group">
             {/* Tooltip 'Monte seu Atendimento Personalizado' exibido ao lado no hover */}
             <div className="absolute right-full mr-3 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-all duration-200 pointer-events-none translate-x-2 group-hover:translate-x-0 z-10 hidden sm:block">
