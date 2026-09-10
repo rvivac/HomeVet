@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { MessageCircle, X, Search, CheckCircle2, MapPin, ChevronDown, Star, Quote, Sparkles, AlertTriangle, Clock } from 'lucide-react';
-import { NEIGHBORHOODS, FAQS, TESTIMONIALS, ALERT_SIGNS, CHECKUP_INTERVALS, createWhatsAppLink } from '../data/content';
+import { MessageCircle, X, Search, CheckCircle2, MapPin, ChevronDown, Star, Quote, Sparkles, AlertTriangle, Clock, ExternalLink } from 'lucide-react';
+import { NEIGHBORHOODS, FAQS, TESTIMONIALS, ALERT_SIGNS, CHECKUP_INTERVALS, CLINIC_CONFIG, createWhatsAppLink } from '../data/content';
 import { InteractiveQuoteModal } from './InteractiveQuote';
 import { CoverageMap } from './CoverageMap';
 
@@ -229,6 +229,8 @@ export const FloatingWhatsApp: React.FC = () => {
   const [selectedNeighborhood, setSelectedNeighborhood] = useState<string>('');
   const [openFaqId, setOpenFaqId] = useState<string | null>(FAQS[0]?.id || null);
   const [faqSearch, setFaqSearch] = useState('');
+  const [testimonialSearch, setTestimonialSearch] = useState('');
+  const [testimonialFilter, setTestimonialFilter] = useState<'all' | 'dog' | 'cat'>('all');
 
   const [isQuickMenuOpen, setIsQuickMenuOpen] = useState(false);
   const quickMenuRef = useRef<HTMLDivElement>(null);
@@ -275,6 +277,19 @@ export const FloatingWhatsApp: React.FC = () => {
   const toggleFaq = (id: string) => {
     setOpenFaqId(openFaqId === id ? null : id);
   };
+
+  const filteredTestimonials = TESTIMONIALS.filter((t) => {
+    const matchesFilter = testimonialFilter === 'all' || t.petSpecies === testimonialFilter || t.petSpecies === 'both';
+    if (!testimonialSearch.trim()) return matchesFilter;
+    const term = testimonialSearch.toLowerCase().trim();
+    return (
+      matchesFilter &&
+      (t.tutorName.toLowerCase().includes(term) ||
+        t.petName.toLowerCase().includes(term) ||
+        t.neighborhood.toLowerCase().includes(term) ||
+        t.text.toLowerCase().includes(term))
+    );
+  });
 
   return (
     <>
@@ -714,9 +729,8 @@ export const FloatingWhatsApp: React.FC = () => {
       {isTestimonialsModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm animate-fadeIn">
           <div className="bg-white rounded-3xl max-w-2xl w-full max-h-[88vh] flex flex-col shadow-2xl border border-brand-green-100 relative overflow-hidden">
-            
             {/* Modal Header */}
-            <div className="p-5 sm:p-6 bg-brand-bg border-b border-brand-green-100 flex items-center justify-between">
+            <div className="p-5 sm:p-6 bg-brand-bg border-b border-brand-green-100 flex items-center justify-between shrink-0">
               <div className="flex items-center gap-3">
                 <div className="w-11 h-11 rounded-2xl bg-white border border-brand-green-200 flex items-center justify-center shadow-xs">
                   <HeartBunnyIcon className="w-8 h-8" />
@@ -729,7 +743,7 @@ export const FloatingWhatsApp: React.FC = () => {
                     </span>
                   </h3>
                   <p className="text-xs text-brand-green-700 font-medium">
-                    Histórias reais de carinho e cuidado veterinário em domicílio
+                    233 avaliações com nota máxima de tutores em Peruíbe e região
                   </p>
                 </div>
               </div>
@@ -743,49 +757,177 @@ export const FloatingWhatsApp: React.FC = () => {
               </button>
             </div>
 
-            {/* Trust highlight banner */}
-            <div className="px-5 py-3 bg-brand-yellow-50/70 border-b border-brand-yellow-100 flex items-center justify-center gap-2 text-xs text-amber-900 font-medium">
-              <Sparkles className="w-4 h-4 text-brand-yellow-500 shrink-0" />
-              <span>Mais de <strong>450 pets atendidos</strong> com método calmo, gentil e sem estresse em Peruíbe e região</span>
+            {/* Google Reviews Trust Banner */}
+            <div className="px-4 sm:px-6 py-3 bg-gradient-to-r from-amber-50/90 via-brand-yellow-50 to-emerald-50/80 border-b border-brand-green-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shrink-0">
+              <div className="flex items-center gap-2.5">
+                <div className="w-8 h-8 rounded-full bg-white shadow-2xs flex items-center justify-center shrink-0 border border-gray-100">
+                  <svg className="w-4 h-4" viewBox="0 0 24 24">
+                    <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z"/>
+                    <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.35 24 12 24z"/>
+                    <path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.18 0 10.03 0 12s.45 3.82 1.25 5.42l4.03-3.15z"/>
+                    <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.35 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/>
+                  </svg>
+                </div>
+                <div>
+                  <div className="text-xs sm:text-sm font-bold text-brand-green-900 flex items-center gap-1.5 flex-wrap">
+                    <span>Google Meu Negócio:</span>
+                    <span className="text-amber-600 font-extrabold">5.0 ★★★★★</span>
+                    <span className="text-[11px] font-bold text-emerald-800 bg-emerald-100 px-2 py-0.2 rounded-full border border-emerald-200">
+                      233 Avaliações
+                    </span>
+                  </div>
+                  <p className="text-[11px] text-gray-600 leading-tight">
+                    Avaliações 100% autênticas e verificadas de tutores em Peruíbe.
+                  </p>
+                </div>
+              </div>
+
+              <a
+                href={CLINIC_CONFIG.googleReviewsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 bg-white hover:bg-gray-50 text-[#1F2937] hover:text-brand-green-900 text-xs font-bold px-3.5 py-2 rounded-xl border border-gray-300/80 shadow-2xs hover:shadow-xs transition-all shrink-0 min-h-[36px]"
+              >
+                <span>Ver todas as 233 no Google Maps</span>
+                <ExternalLink className="w-3.5 h-3.5 text-blue-600" />
+              </a>
+            </div>
+
+            {/* Search and Category Filters */}
+            <div className="p-3 sm:p-4 bg-white border-b border-brand-green-100 flex flex-col sm:flex-row gap-2.5 shrink-0">
+              <div className="relative flex-1">
+                <Search className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+                <input
+                  type="text"
+                  value={testimonialSearch}
+                  onChange={(e) => setTestimonialSearch(e.target.value)}
+                  placeholder="Pesquisar por tutor, pet ou bairro (ex: Pipoca, Stella Maris)..."
+                  className="w-full pl-9 pr-8 py-2 text-xs bg-brand-bg rounded-xl border border-brand-green-200 focus:outline-none focus:border-brand-green-500 font-medium text-brand-green-900 placeholder:text-gray-400"
+                />
+                {testimonialSearch && (
+                  <button
+                    onClick={() => setTestimonialSearch('')}
+                    className="absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 p-0.5 cursor-pointer"
+                    aria-label="Limpar busca"
+                  >
+                    <X className="w-3.5 h-3.5" />
+                  </button>
+                )}
+              </div>
+
+              <div className="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0 scrollbar-none">
+                <button
+                  type="button"
+                  onClick={() => setTestimonialFilter('all')}
+                  className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-colors shrink-0 cursor-pointer ${
+                    testimonialFilter === 'all'
+                      ? 'bg-brand-green-800 text-white'
+                      : 'bg-brand-bg hover:bg-brand-green-100/70 text-brand-green-800 border border-brand-green-200'
+                  }`}
+                >
+                  Todos ({TESTIMONIALS.length})
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setTestimonialFilter('dog')}
+                  className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-colors shrink-0 cursor-pointer ${
+                    testimonialFilter === 'dog'
+                      ? 'bg-brand-green-800 text-white'
+                      : 'bg-brand-bg hover:bg-brand-green-100/70 text-brand-green-800 border border-brand-green-200'
+                  }`}
+                >
+                  🐕 Cães
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setTestimonialFilter('cat')}
+                  className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-colors shrink-0 cursor-pointer ${
+                    testimonialFilter === 'cat'
+                      ? 'bg-brand-green-800 text-white'
+                      : 'bg-brand-bg hover:bg-brand-green-100/70 text-brand-green-800 border border-brand-green-200'
+                  }`}
+                >
+                  🐈 Gatos
+                </button>
+              </div>
             </div>
 
             {/* Testimonials List (Scrollable) */}
-            <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-4">
-              {TESTIMONIALS.map((t) => (
-                <div
-                  key={t.id}
-                  className="bg-brand-bg/80 rounded-2xl p-5 border border-brand-green-100 shadow-xs flex flex-col justify-between"
-                >
-                  <div>
-                    <div className="flex items-center justify-between mb-3">
-                      <div className="flex items-center gap-1">
-                        {[...Array(t.rating)].map((_, i) => (
-                          <Star key={i} className="w-4 h-4 text-brand-yellow-400 fill-brand-yellow-400" />
-                        ))}
-                      </div>
-                      <Quote className="w-5 h-5 text-brand-green-200" />
-                    </div>
-
-                    <p className="text-xs sm:text-sm text-[#2D3748] leading-relaxed italic mb-4">
-                      "{t.text}"
-                    </p>
-                  </div>
-
-                  <div className="pt-3 border-t border-brand-green-100/70 flex items-center justify-between">
+            <div className="flex-1 overflow-y-auto min-h-0 p-4 sm:p-6 space-y-4">
+              {filteredTestimonials.length === 0 ? (
+                <div className="text-center py-10 space-y-2">
+                  <p className="text-sm font-semibold text-gray-600">Nenhum depoimento encontrado para sua busca.</p>
+                  <button
+                    onClick={() => { setTestimonialSearch(''); setTestimonialFilter('all'); }}
+                    className="text-xs text-[#166534] font-bold underline cursor-pointer"
+                  >
+                    Ver todas as avaliações
+                  </button>
+                </div>
+              ) : (
+                filteredTestimonials.map((t) => (
+                  <div
+                    key={t.id}
+                    className="bg-brand-bg/80 rounded-2xl p-5 border border-brand-green-100 shadow-xs flex flex-col justify-between hover:border-brand-green-300 transition-colors"
+                  >
                     <div>
-                      <h4 className="font-display font-bold text-xs sm:text-sm text-brand-green-900">
-                        {t.tutorName}
-                      </h4>
-                      <p className="text-[11px] text-brand-green-700 font-medium">
-                        Tutor(a) de {t.petName}
+                      <div className="flex items-center justify-between mb-3">
+                        <div className="flex items-center gap-1">
+                          {[...Array(t.rating)].map((_, i) => (
+                            <Star key={i} className="w-4 h-4 text-brand-yellow-400 fill-brand-yellow-400" />
+                          ))}
+                          <span className="text-[10px] text-gray-500 font-semibold ml-1.5">
+                            {t.dateText || 'Google Maps'}
+                          </span>
+                        </div>
+                        <Quote className="w-5 h-5 text-brand-green-200" />
+                      </div>
+
+                      <p className="text-xs sm:text-sm text-[#2D3748] leading-relaxed italic mb-4">
+                        "{t.text}"
                       </p>
                     </div>
-                    <span className="text-[10px] font-semibold text-gray-500 bg-white px-2.5 py-1 rounded-full border border-brand-green-100">
-                      {t.neighborhood}
-                    </span>
+
+                    <div className="pt-3 border-t border-brand-green-100/70 flex items-center justify-between">
+                      <div>
+                        <h4 className="font-display font-bold text-xs sm:text-sm text-brand-green-900">
+                          {t.tutorName}
+                        </h4>
+                        <p className="text-[11px] text-brand-green-700 font-medium">
+                          Tutor(a) de {t.petName}
+                        </p>
+                      </div>
+                      <span className="text-[10px] font-semibold text-gray-500 bg-white px-2.5 py-1 rounded-full border border-brand-green-100">
+                        {t.neighborhood}
+                      </span>
+                    </div>
                   </div>
+                ))
+              )}
+
+              {/* End of list Google Maps Link Card */}
+              <div className="bg-gradient-to-br from-brand-bg to-brand-green-50 rounded-2xl p-5 border-2 border-dashed border-brand-green-200 text-center space-y-3">
+                <div className="w-10 h-10 rounded-full bg-white shadow-xs mx-auto flex items-center justify-center border border-gray-100">
+                  <Star className="w-5 h-5 text-brand-yellow-400 fill-brand-yellow-400" />
                 </div>
-              ))}
+                <div>
+                  <h4 className="font-display font-bold text-sm sm:text-base text-brand-green-900">
+                    233 Avaliações Reais com Nota 5.0 no Google Maps
+                  </h4>
+                  <p className="text-xs text-gray-600 max-w-md mx-auto leading-relaxed mt-1">
+                    Confira todas as 233 avaliações na íntegra, com fotos e relatos detalhados dos tutores, diretamente no perfil verificado da Home.Vet no Google.
+                  </p>
+                </div>
+                <a
+                  href={CLINIC_CONFIG.googleReviewsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 bg-[#166534] hover:bg-[#14532d] text-white text-xs font-bold px-5 py-2.5 rounded-xl shadow-pill transition-all cursor-pointer"
+                >
+                  <span>Abrir todas as 233 avaliações no Google Maps</span>
+                  <ExternalLink className="w-3.5 h-3.5" />
+                </a>
+              </div>
             </div>
 
             {/* Modal Footer with Direct WhatsApp Action */}
@@ -795,7 +937,7 @@ export const FloatingWhatsApp: React.FC = () => {
               </span>
               <div className="flex items-center gap-2 w-full sm:w-auto">
                 <a
-                  href={createWhatsAppLink('Olá! Li os depoimentos de outros tutores no site e gostaria de agendar uma consulta para meu pet.')}
+                  href={createWhatsAppLink('Olá! Li os depoimentos dos tutores no site e gostaria de agendar uma consulta para meu pet.')}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#166534] hover:bg-[#14532d] text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow-pill transition-all min-h-[44px]"
