@@ -461,7 +461,7 @@ export const FloatingWhatsApp: React.FC = () => {
           <div className="bg-white rounded-3xl max-w-2xl w-full max-h-[88vh] flex flex-col shadow-2xl border border-brand-green-100 relative overflow-hidden">
             
             {/* Modal Header */}
-            <div className="p-5 sm:p-6 bg-brand-bg border-b border-brand-green-100 flex items-center justify-between">
+            <div className="p-5 sm:p-6 bg-brand-bg border-b border-brand-green-100 flex items-center justify-between shrink-0">
               <div className="flex items-center gap-3">
                 <div className="w-11 h-11 rounded-2xl bg-white border border-brand-green-200 flex items-center justify-center shadow-xs">
                   <CompassDogIcon className="w-8 h-8" />
@@ -485,87 +485,90 @@ export const FloatingWhatsApp: React.FC = () => {
               </button>
             </div>
 
-            {/* Interactive Dynamic Map (Google Maps Tiles + Polygon Area) */}
-            <div className="p-4 sm:p-5 bg-brand-bg/50 border-b border-brand-green-100/60">
-              <div className="mb-2 flex items-center justify-between">
-                <span className="text-xs font-bold text-brand-green-900 uppercase tracking-wider flex items-center gap-1.5">
-                  <span className="w-2 h-2 rounded-full bg-whatsapp animate-ping" />
-                  Mapa Interativo de Cobertura Domiciliar
-                </span>
-                <span className="text-[11px] text-brand-green-700 font-medium hidden sm:inline">
-                  Peruíbe & Região Metropolitana
-                </span>
-              </div>
-              <CoverageMap height="290px" />
-            </div>
-
-            {/* Dropdown de Seleção de Bairros */}
-            <div className="p-4 sm:p-6 border-b border-brand-green-100/60 bg-white space-y-3.5">
-              <div>
-                <label
-                  htmlFor="neighborhood-dropdown"
-                  className="block text-xs font-bold uppercase tracking-wider text-brand-green-900 mb-1.5 flex items-center gap-1.5"
-                >
-                  <MapPin className="w-3.5 h-3.5 text-brand-green-700" />
-                  <span>Consulte seu Bairro ou Balneário na Lista Suspensa:</span>
-                </label>
-                
-                <div className="relative">
-                  <select
-                    id="neighborhood-dropdown"
-                    value={selectedNeighborhood}
-                    onChange={(e) => setSelectedNeighborhood(e.target.value)}
-                    className="w-full bg-brand-bg hover:bg-brand-green-50/60 border-2 border-brand-green-300 focus:border-brand-green-600 focus:bg-white rounded-2xl py-3 pl-4 pr-10 text-sm font-semibold text-brand-green-900 focus:outline-none transition-all cursor-pointer shadow-xs appearance-none"
-                  >
-                    <option value="">Selecione seu bairro na lista suspensa (48 bairros atendidos)...</option>
-                    {allZones.map((zone) => (
-                      <optgroup key={zone} label={`Região: ${zone}`}>
-                        {NEIGHBORHOODS.filter((n) => n.zone === zone).map((bairro) => (
-                          <option key={bairro.name} value={bairro.name}>
-                            {bairro.name}
-                          </option>
-                        ))}
-                      </optgroup>
-                    ))}
-                  </select>
-                  <ChevronDown className="w-5 h-5 text-brand-green-700 absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+            {/* Scrollable Container for Map & Dropdown */}
+            <div className="flex-1 overflow-y-auto min-h-0">
+              {/* Interactive Dynamic Map (Google Maps Tiles + Polygon Area) */}
+              <div className="p-4 sm:p-5 bg-brand-bg/50 border-b border-brand-green-100/60">
+                <div className="mb-2 flex items-center justify-between">
+                  <span className="text-xs font-bold text-brand-green-900 uppercase tracking-wider flex items-center gap-1.5">
+                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
+                    Mapa Interativo de Cobertura Domiciliar
+                  </span>
+                  <span className="text-[11px] text-brand-green-700 font-medium hidden sm:inline">
+                    Peruíbe & Região Metropolitana
+                  </span>
                 </div>
+                <CoverageMap height="260px" />
               </div>
 
-              {/* Card de Confirmação quando selecionado no dropdown */}
-              {selectedNeighborhood && (
-                <div className="p-3.5 sm:p-4 rounded-2xl bg-brand-green-50 border-2 border-brand-green-300 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 animate-fadeIn">
-                  <div className="flex items-center gap-3">
-                    <div className="w-9 h-9 rounded-xl bg-whatsapp text-white flex items-center justify-center shrink-0 shadow-xs">
-                      <CheckCircle2 className="w-5 h-5" />
-                    </div>
-                    <div>
-                      <div className="font-display font-bold text-sm text-brand-green-900 flex items-center gap-2">
-                        <span>{selectedNeighborhood}</span>
-                        <span className="text-[10px] text-brand-green-800 bg-brand-green-200/80 px-2 py-0.5 rounded-full font-medium">
-                          {NEIGHBORHOODS.find((n) => n.name === selectedNeighborhood)?.zone}
-                        </span>
-                      </div>
-                      <p className="text-xs text-brand-green-700 mt-0.5 font-medium">
-                        ✓ Rota de atendimento domiciliar confirmada para este endereço!
-                      </p>
-                    </div>
+              {/* Dropdown de Seleção de Bairros */}
+              <div className="p-4 sm:p-6 bg-white space-y-3.5">
+                <div>
+                  <label
+                    htmlFor="neighborhood-dropdown"
+                    className="block text-xs font-bold uppercase tracking-wider text-brand-green-900 mb-1.5 flex items-center gap-1.5"
+                  >
+                    <MapPin className="w-3.5 h-3.5 text-brand-green-700" />
+                    <span>Consulte seu Bairro ou Balneário na Lista Suspensa:</span>
+                  </label>
+                  
+                  <div className="relative">
+                    <select
+                      id="neighborhood-dropdown"
+                      value={selectedNeighborhood}
+                      onChange={(e) => setSelectedNeighborhood(e.target.value)}
+                      className="w-full bg-brand-bg hover:bg-brand-green-50/60 border-2 border-brand-green-300 focus:border-brand-green-600 focus:bg-white rounded-2xl py-3 pl-4 pr-10 text-sm font-semibold text-brand-green-900 focus:outline-none transition-all cursor-pointer shadow-xs appearance-none"
+                    >
+                      <option value="">Selecione seu bairro na lista suspensa (48 bairros atendidos)...</option>
+                      {allZones.map((zone) => (
+                        <optgroup key={zone} label={`Região: ${zone}`}>
+                          {NEIGHBORHOODS.filter((n) => n.zone === zone).map((bairro) => (
+                            <option key={bairro.name} value={bairro.name}>
+                              {bairro.name}
+                            </option>
+                          ))}
+                        </optgroup>
+                      ))}
+                    </select>
+                    <ChevronDown className="w-5 h-5 text-brand-green-700 absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
                   </div>
-                  <a
-                    href={createWhatsAppLink(`Olá! Gostaria de agendar um atendimento veterinário domiciliar no bairro ${selectedNeighborhood} em Peruíbe.`)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#166534] hover:bg-[#14532d] text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow-pill transition-all cursor-pointer min-h-[44px]"
-                  >
-                    <MessageCircle className="w-3.5 h-3.5 fill-white" />
-                    <span>Agendar Consulta</span>
-                  </a>
                 </div>
-              )}
+
+                {/* Card de Confirmação quando selecionado no dropdown */}
+                {selectedNeighborhood && (
+                  <div className="p-3.5 sm:p-4 rounded-2xl bg-brand-green-50 border-2 border-brand-green-300 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 animate-fadeIn">
+                    <div className="flex items-center gap-3">
+                      <div className="w-9 h-9 rounded-xl bg-emerald-600 text-white flex items-center justify-center shrink-0 shadow-xs">
+                        <CheckCircle2 className="w-5 h-5" />
+                      </div>
+                      <div>
+                        <div className="font-display font-bold text-sm text-brand-green-900 flex items-center gap-2">
+                          <span>{selectedNeighborhood}</span>
+                          <span className="text-[10px] text-brand-green-800 bg-brand-green-200/80 px-2 py-0.5 rounded-full font-medium">
+                            {NEIGHBORHOODS.find((n) => n.name === selectedNeighborhood)?.zone}
+                          </span>
+                        </div>
+                        <p className="text-xs text-brand-green-700 mt-0.5 font-medium">
+                          ✓ Rota de atendimento domiciliar confirmada para este endereço!
+                        </p>
+                      </div>
+                    </div>
+                    <a
+                      href={createWhatsAppLink(`Olá! Gostaria de agendar um atendimento veterinário domiciliar no bairro ${selectedNeighborhood} em Peruíbe.`)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#166534] hover:bg-[#14532d] text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow-pill transition-all cursor-pointer min-h-[44px]"
+                    >
+                      <MessageCircle className="w-3.5 h-3.5 fill-white" />
+                      <span>Agendar Consulta</span>
+                    </a>
+                  </div>
+                )}
+              </div>
             </div>
 
-            {/* Modal Footer with Direct WhatsApp Confirmation */}
-            <div className="p-4 sm:p-5 bg-brand-bg border-t border-brand-green-100 flex flex-col sm:flex-row items-center justify-between gap-3">
+            {/* Modal Footer with Direct WhatsApp Confirmation - ALWAYS VISIBLE AT BOTTOM */}
+            <div className="p-4 sm:p-5 bg-brand-bg border-t border-brand-green-100 flex flex-col sm:flex-row items-center justify-between gap-3 shrink-0">
               <span className="text-xs text-gray-600 text-center sm:text-left">
                 Não encontrou seu endereço? Fale conosco para confirmar a rota!
               </span>
@@ -574,17 +577,11 @@ export const FloatingWhatsApp: React.FC = () => {
                   href={createWhatsAppLink('Olá! Gostaria de confirmar se atendem no meu bairro em Peruíbe e agendar uma visita.')}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 bg-[#166534] hover:bg-[#14532d] text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow-pill transition-all min-h-[44px]"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#166534] hover:bg-[#14532d] text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow-pill transition-all min-h-[44px]"
                 >
                   <MessageCircle className="w-3.5 h-3.5 fill-white" />
                   <span>Consultar no WhatsApp</span>
                 </a>
-                <button
-                  onClick={() => setIsCoverageModalOpen(false)}
-                  className="min-h-[44px] px-3 py-2.5 text-xs font-semibold text-gray-600 hover:text-gray-800 bg-gray-100 hover:bg-gray-200 rounded-xl transition-colors cursor-pointer"
-                >
-                  Fechar
-                </button>
               </div>
             </div>
 
@@ -692,7 +689,7 @@ export const FloatingWhatsApp: React.FC = () => {
             </div>
 
             {/* Modal Footer with Direct WhatsApp Action */}
-            <div className="p-4 sm:p-5 bg-brand-bg border-t border-brand-green-100 flex flex-col sm:flex-row items-center justify-between gap-3">
+            <div className="p-4 sm:p-5 bg-brand-bg border-t border-brand-green-100 flex flex-col sm:flex-row items-center justify-between gap-3 shrink-0">
               <span className="text-xs text-gray-600 text-center sm:text-left">
                 Ainda tem alguma dúvida sobre o atendimento do seu pet?
               </span>
@@ -701,17 +698,11 @@ export const FloatingWhatsApp: React.FC = () => {
                   href={createWhatsAppLink('Olá! Tenho uma dúvida sobre o atendimento veterinário domiciliar em Peruíbe.')}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 bg-[#166534] hover:bg-[#14532d] text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow-pill transition-all min-h-[44px]"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#166534] hover:bg-[#14532d] text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow-pill transition-all min-h-[44px]"
                 >
                   <MessageCircle className="w-3.5 h-3.5 fill-white" />
                   <span>Tirar Dúvida no WhatsApp</span>
                 </a>
-                <button
-                  onClick={() => setIsFaqModalOpen(false)}
-                  className="min-h-[44px] px-3 py-2.5 text-xs font-semibold text-gray-600 hover:text-gray-800 bg-gray-100 hover:bg-gray-200 rounded-xl transition-colors cursor-pointer"
-                >
-                  Fechar
-                </button>
               </div>
             </div>
 
@@ -798,7 +789,7 @@ export const FloatingWhatsApp: React.FC = () => {
             </div>
 
             {/* Modal Footer with Direct WhatsApp Action */}
-            <div className="p-4 sm:p-5 bg-brand-bg border-t border-brand-green-100 flex flex-col sm:flex-row items-center justify-between gap-3">
+            <div className="p-4 sm:p-5 bg-brand-bg border-t border-brand-green-100 flex flex-col sm:flex-row items-center justify-between gap-3 shrink-0">
               <span className="text-xs text-gray-600 text-center sm:text-left">
                 Proporcione essa mesma tranquilidade para seu melhor amigo!
               </span>
@@ -807,17 +798,11 @@ export const FloatingWhatsApp: React.FC = () => {
                   href={createWhatsAppLink('Olá! Li os depoimentos de outros tutores no site e gostaria de agendar uma consulta para meu pet.')}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 bg-[#166534] hover:bg-[#14532d] text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow-pill transition-all min-h-[44px]"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#166534] hover:bg-[#14532d] text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow-pill transition-all min-h-[44px]"
                 >
                   <MessageCircle className="w-3.5 h-3.5 fill-white" />
                   <span>Agendar no WhatsApp</span>
                 </a>
-                <button
-                  onClick={() => setIsTestimonialsModalOpen(false)}
-                  className="min-h-[44px] px-3 py-2.5 text-xs font-semibold text-gray-600 hover:text-gray-800 bg-gray-100 hover:bg-gray-200 rounded-xl transition-colors cursor-pointer"
-                >
-                  Fechar
-                </button>
               </div>
             </div>
 
@@ -931,7 +916,7 @@ export const FloatingWhatsApp: React.FC = () => {
             </div>
 
             {/* Modal Footer with Direct WhatsApp Action */}
-            <div className="p-4 sm:p-5 bg-brand-bg border-t border-brand-green-100 flex flex-col sm:flex-row items-center justify-between gap-3">
+            <div className="p-4 sm:p-5 bg-brand-bg border-t border-brand-green-100 flex flex-col sm:flex-row items-center justify-between gap-3 shrink-0">
               <span className="text-xs text-gray-600 text-center sm:text-left">
                 Notou algo diferente no seu pet? Fale agora com nossa equipe.
               </span>
@@ -940,17 +925,11 @@ export const FloatingWhatsApp: React.FC = () => {
                   href={createWhatsAppLink('Olá! Notei uma alteração no meu pet e gostaria de agendar uma avaliação preventiva em casa.')}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 bg-[#166534] hover:bg-[#14532d] text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow-pill transition-all min-h-[44px]"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#166534] hover:bg-[#14532d] text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow-pill transition-all min-h-[44px]"
                 >
                   <MessageCircle className="w-3.5 h-3.5 fill-white" />
                   <span>Agendar Avaliação no WhatsApp</span>
                 </a>
-                <button
-                  onClick={() => setIsAlertSignsModalOpen(false)}
-                  className="min-h-[44px] px-3 py-2.5 text-xs font-semibold text-gray-600 hover:text-gray-800 bg-gray-100 hover:bg-gray-200 rounded-xl transition-colors cursor-pointer"
-                >
-                  Fechar
-                </button>
               </div>
             </div>
 

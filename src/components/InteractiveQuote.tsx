@@ -178,7 +178,7 @@ export const InteractiveQuoteModal: React.FC<{
         </div>
 
         {/* Modal Footer with Direct WhatsApp Submission */}
-        <div className="p-4 sm:p-5 bg-brand-bg border-t border-brand-green-100 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div className="p-4 sm:p-5 bg-brand-bg border-t border-brand-green-100 flex flex-col sm:flex-row items-center justify-between gap-3 shrink-0">
           <span className="text-xs text-gray-600 text-center sm:text-left">
             O WhatsApp abrirá com tudo pronto para você enviar!
           </span>
@@ -187,18 +187,12 @@ export const InteractiveQuoteModal: React.FC<{
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 bg-whatsapp hover:bg-whatsapp-hover text-white text-xs font-bold px-5 py-2.5 rounded-xl shadow-pill transition-all"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#166534] hover:bg-[#14532d] text-white text-xs font-bold px-5 py-2.5 rounded-xl shadow-pill transition-all min-h-[44px]"
             >
               <MessageCircle className="w-4 h-4 fill-white" />
               <span>Enviar pelo WhatsApp</span>
               <Send className="w-3.5 h-3.5 opacity-80" />
             </a>
-            <button
-              onClick={onClose}
-              className="px-3 py-2.5 text-xs font-semibold text-gray-600 hover:text-gray-800 bg-gray-100 hover:bg-gray-200 rounded-xl transition-colors cursor-pointer"
-            >
-              Fechar
-            </button>
           </div>
         </div>
 
