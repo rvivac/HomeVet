@@ -74,8 +74,13 @@ export default {
         'bounce-subtle': 'bounce-subtle 3s ease-in-out infinite',
         'blink-subtle-20s': 'blinkSubtle 20s ease-in-out infinite',
         'ring-subtle-20s': 'ringSubtle 20s cubic-bezier(0.215, 0.61, 0.355, 1) infinite',
+        'fadeIn': 'fadeIn 0.25s ease-out forwards',
       },
       keyframes: {
+        fadeIn: {
+          '0%': { opacity: '0', transform: 'translateY(4px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
         float: {
           '0%, 100%': { transform: 'translateY(0)' },
           '50%': { transform: 'translateY(-8px)' },

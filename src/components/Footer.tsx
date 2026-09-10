@@ -224,14 +224,20 @@ export const Footer: React.FC = () => {
 
         </div>
 
-        {/* Bottom copyright */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-brand-green-200/60">
-          <p>
+        {/* Bottom copyright & Credits */}
+        <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-brand-green-200/70">
+          <p className="text-center md:text-left">
             © {new Date().getFullYear()} {CLINIC_CONFIG.name}. Todos os direitos reservados. {CLINIC_CONFIG.crmv}.
           </p>
-          <p className="flex items-center gap-1">
-            Feito com <Heart className="w-3.5 h-3.5 text-rose-400 fill-rose-400" /> para os pets e tutores de Peruíbe e região.
-          </p>
+          <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 text-center md:text-right">
+            <span className="text-brand-green-100/90 font-medium">
+              Design &amp; Desenvolvimento · 2026 Rvivac Guild LTDA
+            </span>
+            <span className="hidden sm:inline text-brand-green-700/80">•</span>
+            <p className="flex items-center justify-center gap-1 text-brand-green-200/60">
+              Feito com <Heart className="w-3.5 h-3.5 text-rose-400 fill-rose-400" /> para os pets e tutores de Peruíbe e região.
+            </p>
+          </div>
         </div>
 
       </div>
