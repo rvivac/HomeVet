@@ -79,8 +79,8 @@ export const Services: React.FC = () => {
                 <div>
                   {/* Top Bar: Icon + Badge */}
                   <div className="flex items-center justify-between mb-5">
-                    <div className={`w-13 h-13 rounded-2xl flex items-center justify-center p-3.5 shadow-sm ${palette.bgBadge}`}>
-                      <IconComponent className="w-7 h-7" />
+                    <div className={`w-12 h-12 rounded-2xl flex items-center justify-center p-3 shadow-xs ${palette.bgBadge}`}>
+                      <IconComponent className="w-6 h-6" />
                     </div>
                     {service.badge && (
                       <span className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-white text-brand-green-800 border border-brand-green-200/60 shadow-xs">
@@ -89,37 +89,39 @@ export const Services: React.FC = () => {
                     )}
                   </div>
 
-                  {/* Title & Short Description */}
-                  <h3 className="font-display font-bold text-xl text-brand-green-900 mb-2">
+                  {/* Title */}
+                  <h3 className="font-display font-bold text-xl text-brand-green-900 mb-2 min-h-[3.5rem] flex items-center">
                     {service.title}
                   </h3>
-                  <p className="text-sm text-[#4A5568] leading-relaxed mb-5">
+
+                  {/* Short Description - Strict UX: Maximum 2 lines */}
+                  <p className="text-sm text-[#4A5568] leading-snug line-clamp-2 h-10 overflow-hidden mb-5">
                     {service.shortDesc}
                   </p>
 
-                  {/* Checklist of features */}
-                  <ul className="space-y-2 mb-6 text-xs text-[#2D3748]">
-                    {service.features.map((feature, i) => (
+                  {/* Checklist of features - Strict UX: Exactly up to 3 general topics */}
+                  <ul className="space-y-2.5 mb-6 text-xs text-[#2D3748]">
+                    {service.features.slice(0, 3).map((feature, i) => (
                       <li key={i} className="flex items-start gap-2">
                         <div className="w-4 h-4 rounded-full bg-brand-green-100 flex items-center justify-center shrink-0 mt-0.5 text-brand-green-700">
                           <Check className="w-2.5 h-2.5 stroke-[3]" />
                         </div>
-                        <span className="leading-tight">{feature}</span>
+                        <span className="leading-tight font-medium text-gray-700">{feature}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
 
-                {/* Card Actions */}
+                {/* Card Actions: Internal button in alternative color (azul petróleo) with short direct phrase */}
                 <div className="space-y-2 pt-4 border-t border-brand-green-200/50">
                   <a
                     href={createWhatsAppLink(service.suggestedMsg)}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full flex items-center justify-center gap-2 bg-whatsapp hover:bg-whatsapp-hover text-white text-sm font-bold py-2.5 px-4 rounded-2xl shadow-pill transition-all"
+                    className="w-full flex items-center justify-center gap-2 bg-brand-petrol-600 hover:bg-brand-petrol-700 text-white text-sm font-bold py-2.5 px-4 rounded-2xl shadow-md hover:shadow-lg transition-all active:scale-[0.98]"
                   >
                     <MessageCircle className="w-4 h-4 fill-white" />
-                    <span>Agendar Este Serviço</span>
+                    <span>Agendar Agora</span>
                   </a>
 
                   <button
@@ -180,10 +182,10 @@ export const Services: React.FC = () => {
                 href={createWhatsAppLink(selectedService.suggestedMsg)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 flex items-center justify-center gap-2 bg-whatsapp hover:bg-whatsapp-hover text-white font-bold py-3 px-4 rounded-2xl shadow-pill transition-all"
+                className="flex-1 flex items-center justify-center gap-2 bg-brand-petrol-600 hover:bg-brand-petrol-700 text-white font-bold py-3 px-4 rounded-2xl shadow-md hover:shadow-lg transition-all"
               >
                 <MessageCircle className="w-5 h-5 fill-white" />
-                <span>Solicitar Agendamento</span>
+                <span>Agendar Agora</span>
               </a>
               <button
                 onClick={() => setSelectedService(null)}

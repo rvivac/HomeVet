@@ -1,4 +1,4 @@
-import type { ServiceItem, BenefitItem, TestimonialItem, NeighborhoodItem, FAQItem } from '../types';
+import type { ServiceItem, BenefitItem, TestimonialItem, NeighborhoodItem, FAQItem, TeamMember } from '../types';
 
 export const CLINIC_CONFIG = {
   name: 'Home.Vet',
@@ -22,17 +22,43 @@ export const CLINIC_CONFIG = {
   // Responsável Técnico Oficial
   vetName: 'Dr. Renato Pegoretti',
   crmv: 'CRMV-SP 45.390',
-  vetTitle: 'Médico Veterinário e Responsável Técnico',
-  vetSpecialty: 'Clínica Médica de Cães e Gatos, Vacinação e Medicina Preventiva',
-  vetBio: 'Médico veterinário desde 2019 com foco exclusivo no atendimento domiciliar humanizado de cães e gatos. Pai do Enzo e da Anna Luíze, priorizo estar sempre em família. Atuo ao lado da minha esposa, onde além do amor compartilhamos a profissão veterinária. Nosso objetivo é levar o mesmo cuidado e qualidade de clínica para a segurança do seu lar!',
+  vetTitle: 'Médico Veterinário',
+  vetSpecialty: 'Clínica Médica de Cães e Gatos e Atendimento Domiciliar',
+  vetBio: 'Médico veterinário graduado e atuante desde 2019 (CRMV-SP 45.390). Focado no atendimento clínico humanizado no lar para cães e gatos, proporcionando bem-estar e acolhimento sem o estresse hospitalar.',
 
-  // Planos de Saúde Credenciados
-  healthPlans: ['Petlove Saúde', 'Au Happy', 'PetLife'],
+  // Descrição da atuação conjunta da equipe
+  teamJointWork: 'Atuação conjunta no acolhimento e consultas domiciliares, além de suporte e realização de pequenas cirurgias em clínicas parceiras estruturadas.',
+
+  // Planos de Saúde Pet Credenciados
+  healthPlans: ['Petlove Saúde', 'PetLife'],
 
   // Horários de Atendimento Domiciliar
   workingHours: 'Segunda a Sábado com Agendamento Prévio',
-  emergencyDisclaimer: 'Para emergências cirúrgicas com risco iminente de vida, recomendamos o encaminhamento imediato a um hospital veterinário 24h parceiro.',
+  emergencyDisclaimer: 'Para emergências com riscos elevados, recomendamos o encaminhamento a hospitais ou clínicas veterinárias com infraestrutura de cirurgia e internação.',
 };
+
+export const TEAM_MEMBERS: TeamMember[] = [
+  {
+    id: 'dr-renato',
+    name: 'Dr. Renato Pegoretti',
+    role: 'Médico Veterinário',
+    crmvOrRoleNote: 'CRMV-SP 45.390',
+    activeSince: 'Atuante desde 2019',
+    bio: 'Médico Veterinário com sólida experiência clínica e foco no atendimento humanizado de cães e gatos. Dedicado a proporcionar diagnósticos precisos e tratamentos eficazes no aconchego do lar da família.',
+    highlights: ['CRMV-SP 45.390', 'Atuação desde 2019', 'Clínica Geral & Domiciliar'],
+    imageUrl: 'images/dr-renato.jpg',
+  },
+  {
+    id: 'daiane-harume',
+    name: 'Daiane Harume Aloise Romualdo Prado',
+    role: 'Auxiliar Veterinária & Graduanda em Medicina Veterinária',
+    crmvOrRoleNote: 'Auxiliar Veterinária e Graduanda',
+    activeSince: 'Atuante desde 2018',
+    bio: 'Auxiliar Veterinária com ampla experiência em manejo pet e graduanda em Medicina Veterinária. Atua ao lado do Dr. Renato com olhar empático, carinho com os animais e rigor nos cuidados de higiene e assistência clínica.',
+    highlights: ['Atuação desde 2018', 'Manejo Gentil & Sem Medo', 'Graduanda em Med. Veterinária'],
+    imageUrl: 'images/vet-profile.jpg',
+  },
+];
 
 export const createWhatsAppLink = (message?: string): string => {
   if (message) {
@@ -44,31 +70,31 @@ export const createWhatsAppLink = (message?: string): string => {
 
 export const BENEFITS: BenefitItem[] = [
   {
-    id: 'transporte',
-    title: 'Zero Estresse no Transporte',
-    description: 'Diga adeus às caixas de transporte apertadas, miados de desespero, vômito de enjoo no carro ou brigas para colocar o pet no veículo.',
+    id: 'caixa-transporte',
+    title: 'Fim das Caixas de Transporte',
+    description: 'Elimine miados de desespero, latidos de pânico e a luta estressante para colocar cães e gatos em caixas apertadas.',
     iconName: 'CarFront',
-    tag: 'Sem Traumas',
+    tag: 'Sem Sofrimento',
   },
   {
-    id: 'ambiente',
-    title: 'Ambiente Seguro e Familiar',
-    description: 'No próprio sofá ou tapete, o pet permanece calmo. Isso garante aferição fidedigna da frequência cardíaca, pressão e temperatura.',
+    id: 'deslocamento',
+    title: 'Zero Deslocamentos e Enjoos',
+    description: 'Sem trânsito, calor dentro do carro, náuseas ou vômitos no trajeto. Seu pet permanece calmo do início ao fim.',
     iconName: 'Home',
-    tag: 'No Território Dele',
+    tag: 'No Conforto do Lar',
   },
   {
-    id: 'comodidade',
-    title: 'Comodidade Total para a Família',
-    description: 'Sem filas de espera com animais agitados, sem perda de tempo no trânsito ou dificuldade para estacionar. Atendimento pontual.',
-    iconName: 'Clock',
-    tag: 'Economize seu Tempo',
-  },
-  {
-    id: 'atencao',
-    title: 'Consulta Humanizada Sem Pressa',
-    description: 'Tempo dedicado exclusivamente para ouvir o histórico do seu companheiro, examinar cada detalhe com carinho e tirar todas as dúvidas.',
+    id: 'ambiente-seguro',
+    title: 'No Território do Pet',
+    description: 'No tapete ou sofá onde ele se sente seguro, os sinais vitais e o comportamento refletem o estado real de saúde.',
     iconName: 'HeartHandshake',
+    tag: 'Sem Estresse',
+  },
+  {
+    id: 'atencao-dedicada',
+    title: 'Consulta Calma e Sem Pressa',
+    description: 'Tempo exclusivo para ouvir você, examinar o pet com carinho e reforço positivo, sem salas de espera agitadas.',
+    iconName: 'Clock',
     tag: '100% Dedicado',
   },
 ];
@@ -77,44 +103,41 @@ export const SERVICES: ServiceItem[] = [
   {
     id: 'consulta',
     title: 'Consultas Clínicas de Rotina',
-    shortDesc: 'Avaliação física minuciosa, check-up geral, controle de peso, inspeção de pele, ouvidos, dentes e orientações de bem-estar.',
-    longDesc: 'Uma avaliação completa da cabeça à ponta da cauda no aconchego da sua sala ou quintal. Ideal para check-ups periódicos, investigação de alterações no comportamento e prevenção de doenças.',
+    shortDesc: 'Avaliação física minuciosa, check-up geral e orientações preventivas no conforto do seu lar.',
+    longDesc: 'Uma avaliação completa da cabeça à cauda no aconchego da sua sala ou quintal. Ideal para check-ups periódicos, investigação de alterações no comportamento e prevenção de doenças.',
     iconName: 'Stethoscope',
     badge: 'Mais Procurado',
     features: [
       'Exame físico completo sem estresse',
-      'Avaliação de escore corporal e nutrição',
-      'Prescrição médica e orientações de manejo',
+      'Prescrição médica e orientações de rotina',
       'Acompanhamento pós-consulta por WhatsApp',
     ],
     suggestedMsg: 'Olá, Dr. Renato! Gostaria de agendar uma Consulta Clínica em domicílio para o meu pet em Peruíbe.',
   },
   {
     id: 'vacinacao',
-    title: 'Vacinação Importada Atualizada',
-    shortDesc: 'Proteção essencial anual com vacinas importadas de alta qualidade e cadeia de frio rigorosamente controlada.',
+    title: 'Vacinação Ética Importada',
+    shortDesc: 'Proteção essencial com vacinas importadas de alta eficácia e cadeia de frio rigorosamente controlada.',
     longDesc: 'Aplicação gentil com reforço positivo (petiscos e carinho). Carteirinha atualizada e carimbada com controle térmico rigoroso das doses.',
     iconName: 'Syringe',
     badge: 'Proteção Essencial',
     features: [
-      'Cães: V10/V8 múltipla, Antirrábica, Giárdia, Gripe',
-      'Gatos: Quádrupla (V4), Quíntupla (V5 FeLV) e Antirrábica',
-      'Vacinas éticas importadas com lote registrado',
-      'A raiva não escolhe nem raça e nem tamanho: proteja seu pet!',
+      'Cães: V8/V10, Antirrábica, Giárdia e Gripe',
+      'Gatos: V4, V5 (FeLV) e Antirrábica',
+      'Carteirinha oficial atualizada e carimbada',
     ],
     suggestedMsg: 'Olá, Dr. Renato! Gostaria de verificar e atualizar a vacinação do meu pet em casa.',
   },
   {
     id: 'exames',
-    title: 'Coleta de Exames Laboratoriais',
-    shortDesc: 'Coleta de sangue, urina, fezes e citologia com técnicas gentis e envio a laboratórios parceiros certificados.',
+    title: 'Coleta de Exames no Lar',
+    shortDesc: 'Coleta de sangue, urina, fezes e citologia sem o pânico da clínica, garantindo laudos precisos.',
     longDesc: 'Colher exames em casa reduz o estresse, evitando picos artificiais de glicose e cortisol causados pelo medo na clínica, gerando laudos muito mais fidedignos.',
     iconName: 'FlaskConical',
     badge: 'Resultados Precisos',
     features: [
       'Hemograma completo e painel bioquímico',
-      'Exames de fezes e urina laboratoriais',
-      'Raspados de pele e citologia cutânea/otológica',
+      'Exames parasitológicos e citologia',
       'Envio rápido dos laudos em PDF pelo WhatsApp',
     ],
     suggestedMsg: 'Olá, Dr. Renato! Preciso agendar a coleta de exames laboratoriais em casa para o meu pet.',
@@ -122,15 +145,14 @@ export const SERVICES: ServiceItem[] = [
   {
     id: 'microchip',
     title: 'Microchipagem & Atestados',
-    shortDesc: 'Identificação eletrônica permanente para seu pet e emissão de atestados sanitários para viagens nacionais e internacionais.',
+    shortDesc: 'Identificação eletrônica definitiva padrão ISO e atestados sanitários para viagens nacionais e internacionais.',
     longDesc: 'Implantação rápida e indolor do microchip padrão ISO internacional, garantindo segurança contra perdas e documentações oficiais de viagem.',
     iconName: 'Award',
     badge: 'Segurança & Viagens',
     features: [
       'Microchip padrão internacional ISO',
-      'Atestados de saúde para companhias aéreas',
-      'Atestados para transporte rodoviário',
-      'Documentações oficiais de viagem',
+      'Atestados para transporte aéreo e rodoviário',
+      'Documentações sanitárias para viagens',
     ],
     suggestedMsg: 'Olá, Dr. Renato! Gostaria de informações sobre microchipagem ou atestado de viagem para o meu pet.',
   },
@@ -257,19 +279,13 @@ export const FAQS: FAQItem[] = [
     id: 'faq-2',
     category: 'pagamento',
     question: 'Vocês atendem planos de saúde pet?',
-    answer: 'Sim! Atendemos com muito orgulho os principais planos de saúde pet do mercado: Petlove Saúde, Au Happy e PetLife. Basta nos enviar o número da carteirinha ou token no momento do contato pelo WhatsApp para verificarmos a cobertura.',
+    answer: 'Sim! Atendemos com muito orgulho os principais planos de saúde pet do mercado: Petlove Saúde e PetLife. Basta nos enviar o número da carteirinha ou token no momento do contato pelo WhatsApp para verificarmos a cobertura.',
   },
   {
     id: 'faq-3',
     category: 'urgencias',
     question: 'Vocês atendem emergências graves com risco cirúrgico?',
-    answer: 'O atendimento domiciliar é focado em clínica geral, vacinas, exames e medicina preventiva. Casos graves com risco iminente de morte ou necessidade de cirurgia imediata devem ser levados a hospitais veterinários 24h com centro cirúrgico e internação.',
-  },
-  {
-    id: 'faq-4',
-    category: 'atendimento',
-    question: 'Quais bairros e cidades são atendidos?',
-    answer: 'Atendemos todos os bairros e condomínios de Peruíbe (Centro, Stella Maris, Três Marias, Guaraú, Ribamar, Arpoador, Oásis, etc.) e cidades vizinhas como Itanhaém sob agendamento prévio.',
+    answer: 'O atendimento domiciliar é focado em clínica geral, vacinas, exames e medicina preventiva. Casos graves com riscos elevados devem ser levados a hospitais ou clínicas veterinárias com infraestrutura de cirurgia e internação.',
   },
   {
     id: 'faq-5',

@@ -18,11 +18,28 @@ export const Header: React.FC = () => {
     { label: 'Início', href: '#inicio' },
     { label: 'Vantagens', href: '#vantagens' },
     { label: 'Serviços', href: '#servicos' },
-    { label: 'Simulador', href: '#simulador' },
+    { label: 'Monte seu Atendimento', href: '#simulador' },
     { label: 'Área de Atendimento', href: '#cobertura' },
-    { label: 'Sobre o Dr. Renato', href: '#sobre' },
+    { label: 'Quem Somos', href: '#sobre' },
+    { label: 'Depoimentos', href: '#depoimentos' },
     { label: 'Dúvidas', href: '#faq' },
   ];
+
+  const handleNavClick = (href: string, e: React.MouseEvent) => {
+    if (href === '#simulador') {
+      e.preventDefault();
+      window.dispatchEvent(new CustomEvent('open-quote-modal'));
+    } else if (href === '#cobertura') {
+      e.preventDefault();
+      window.dispatchEvent(new CustomEvent('open-coverage-modal'));
+    } else if (href === '#faq') {
+      e.preventDefault();
+      window.dispatchEvent(new CustomEvent('open-faq-modal'));
+    } else if (href === '#depoimentos') {
+      e.preventDefault();
+      window.dispatchEvent(new CustomEvent('open-testimonials-modal'));
+    }
+  };
 
   return (
     <header
@@ -61,7 +78,8 @@ export const Header: React.FC = () => {
             <a
               key={link.href}
               href={link.href}
-              className="text-sm font-semibold text-[#4A5568] hover:text-brand-green-800 transition-colors px-1 py-1 rounded-lg hover:bg-brand-green-50"
+              onClick={(e) => handleNavClick(link.href, e)}
+              className="text-sm font-semibold text-[#4A5568] hover:text-brand-green-800 transition-colors px-1 py-1 rounded-lg hover:bg-brand-green-50 cursor-pointer"
             >
               {link.label}
             </a>
@@ -69,26 +87,28 @@ export const Header: React.FC = () => {
         </nav>
 
         {/* Header Right Action Button */}
-        <div className="hidden sm:flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3">
           <a
             href={createWhatsAppLink('Olá! Gostaria de agendar um atendimento veterinário em casa.')}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 bg-whatsapp hover:bg-whatsapp-hover text-white text-sm font-bold px-4 py-2.5 rounded-full shadow-pill transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0"
+            className="inline-flex items-center gap-1.5 sm:gap-2 bg-whatsapp hover:bg-whatsapp-hover text-white text-xs sm:text-sm font-bold px-3 py-2 sm:px-4 sm:py-2.5 rounded-full shadow-pill transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
+            aria-label="Agendar consulta diretamente pelo WhatsApp"
           >
             <MessageCircle className="w-4 h-4 fill-white" />
-            <span>Agendar no WhatsApp</span>
+            <span className="hidden xs:inline sm:inline">Agendar no WhatsApp</span>
+            <span className="inline xs:hidden sm:hidden">WhatsApp</span>
           </a>
-        </div>
 
-        {/* Mobile Menu Toggle */}
-        <button
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="lg:hidden p-2 rounded-xl text-brand-green-900 hover:bg-brand-green-100 transition-colors focus:outline-none"
-          aria-label={mobileMenuOpen ? 'Fechar menu' : 'Abrir menu'}
-        >
-          {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-        </button>
+          {/* Mobile Menu Toggle */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="lg:hidden p-2 rounded-xl text-brand-green-900 hover:bg-brand-green-100 transition-colors focus:outline-none cursor-pointer"
+            aria-label={mobileMenuOpen ? 'Fechar menu' : 'Abrir menu'}
+          >
+            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Menu Drawer */}
@@ -99,8 +119,11 @@ export const Header: React.FC = () => {
               <a
                 key={link.href}
                 href={link.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className="text-base font-semibold text-[#2D3748] hover:text-brand-green-800 py-2.5 px-3 rounded-xl hover:bg-brand-green-50 transition-colors"
+                onClick={(e) => {
+                  setMobileMenuOpen(false);
+                  handleNavClick(link.href, e);
+                }}
+                className="text-base font-semibold text-[#2D3748] hover:text-brand-green-800 py-2.5 px-3 rounded-xl hover:bg-brand-green-50 transition-colors cursor-pointer"
               >
                 {link.label}
               </a>

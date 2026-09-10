@@ -40,3 +40,15 @@ export interface FAQItem {
   answer: string;
   category: 'atendimento' | 'pagamento' | 'preparo' | 'urgencias';
 }
+
+export interface TeamMember {
+  id: string;
+  name: string;
+  role: string;
+  crmvOrRoleNote: string;
+  activeSince: string;
+  bio: string;
+  highlights: string[];
+  imageUrl?: string;
+}
+

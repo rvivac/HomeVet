@@ -104,16 +104,47 @@ export const Footer: React.FC = () => {
                 <a href="#servicos" className="hover:text-white transition-colors">Nossos Serviços</a>
               </li>
               <li>
-                <a href="#simulador" className="hover:text-white transition-colors">Simulador de Agendamento</a>
+                <button
+                  onClick={() => window.dispatchEvent(new CustomEvent('open-quote-modal'))}
+                  className="hover:text-white transition-colors text-left text-sm text-brand-green-100/70 cursor-pointer"
+                >
+                  Monte seu Atendimento Personalizado
+                </button>
               </li>
               <li>
-                <a href="#cobertura" className="hover:text-white transition-colors">Peruíbe & Região</a>
+                <button
+                  onClick={() => window.dispatchEvent(new CustomEvent('open-coverage-modal'))}
+                  className="hover:text-white transition-colors text-left text-sm text-brand-green-100/70"
+                >
+                  Regiões & Bairros Atendidos
+                </button>
               </li>
               <li>
-                <a href="#sobre" className="hover:text-white transition-colors">Sobre o Dr. Renato</a>
+                <a href="#sobre" className="hover:text-white transition-colors">Quem Somos (Equipe)</a>
               </li>
               <li>
-                <a href="#faq" className="hover:text-white transition-colors">Dúvidas Frequentes</a>
+                <button
+                  onClick={() => window.dispatchEvent(new CustomEvent('open-testimonials-modal'))}
+                  className="hover:text-white transition-colors text-left text-sm text-brand-green-100/70 cursor-pointer"
+                >
+                  Tutores e Pets Felizes
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => window.dispatchEvent(new CustomEvent('open-alert-signs-modal'))}
+                  className="hover:text-white transition-colors text-left text-sm text-brand-green-100/70 cursor-pointer"
+                >
+                  Quando Chamar o Veterinário?
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => window.dispatchEvent(new CustomEvent('open-faq-modal'))}
+                  className="hover:text-white transition-colors text-left text-sm text-brand-green-100/70 cursor-pointer"
+                >
+                  Dúvidas Frequentes
+                </button>
               </li>
             </ul>
           </div>
@@ -121,15 +152,29 @@ export const Footer: React.FC = () => {
           {/* Hours, CRMV & Location */}
           <div className="lg:col-span-5 space-y-4">
             <h4 className="font-display font-bold text-base text-white">
-              Responsabilidade Técnica e Contato
+              Equipe Técnica e Atendimento
             </h4>
 
             <div className="space-y-3 text-xs sm:text-sm text-brand-green-100/80">
               <div className="flex items-start gap-2.5">
                 <ShieldCheck className="w-4 h-4 text-whatsapp shrink-0 mt-0.5" />
-                <div>
-                  <strong className="text-white block">{CLINIC_CONFIG.vetName}</strong>
-                  <span>{CLINIC_CONFIG.vetTitle} • <strong>{CLINIC_CONFIG.crmv}</strong></span>
+                <div className="space-y-2.5">
+                  <div>
+                    <strong className="text-white block font-display text-sm font-bold">
+                      {CLINIC_CONFIG.vetName} (CRMV-SP 45.390)
+                    </strong>
+                    <span className="text-brand-green-200 text-xs block mt-0.5">
+                      Médico Veterinário
+                    </span>
+                  </div>
+                  <div>
+                    <strong className="text-white block font-display text-sm font-bold">
+                      Daiane Harume Aloise Romualdo Prado
+                    </strong>
+                    <span className="text-brand-green-200 text-xs block mt-0.5">
+                      Auxiliar Veterinária e Graduanda em Medicina Veterinária
+                    </span>
+                  </div>
                 </div>
               </div>
 
