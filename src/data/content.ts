@@ -450,26 +450,6 @@ export const TESTIMONIALS: TestimonialItem[] = [
     text: 'Limpeza de ouvidos, exame de pele e medicação orientada perfeitamente. Muito prático e o valor é super justo pelo serviço diferenciado.',
     dateText: 'Há 4 meses',
   },
-  {
-    id: '24',
-    tutorName: 'Priscila Neves',
-    petName: 'Meg & Cookie (Shih-tzus)',
-    petSpecies: 'dog',
-    neighborhood: 'Jardim dos Prados',
-    rating: 5,
-    text: 'Atendimento pelo Petlove para as duas irmãs juntas. Economia de tempo, zero estresse e muito carinho. Nota 5 estrelas sempre!',
-    dateText: 'Há 5 meses',
-  },
-  {
-    id: '25',
-    tutorName: 'Leonardo Duarte',
-    petName: 'Pantera (Gatinha preta)',
-    petSpecies: 'cat',
-    neighborhood: 'Balneário Barra de Jangada',
-    rating: 5,
-    text: 'Consulta preventiva no conforto do sofá. Dr. Renato examinou tudo com muita calma e clareza. Melhor veterinário de Peruíbe!',
-    dateText: 'Há 5 meses',
-  },
 ];
 
 export const ALERT_SIGNS = [

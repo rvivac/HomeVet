@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { MessageCircle, X, Search, CheckCircle2, MapPin, ChevronDown, Star, Quote, Sparkles, AlertTriangle, Clock, ExternalLink } from 'lucide-react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { MessageCircle, X, Search, CheckCircle2, MapPin, ChevronDown, Star, Quote, Sparkles, AlertTriangle, Clock, ExternalLink, RotateCw } from 'lucide-react';
 import { NEIGHBORHOODS, FAQS, TESTIMONIALS, ALERT_SIGNS, CHECKUP_INTERVALS, CLINIC_CONFIG, createWhatsAppLink } from '../data/content';
 import { InteractiveQuoteModal } from './InteractiveQuote';
 import { CoverageMap } from './CoverageMap';
@@ -235,10 +235,26 @@ export const FloatingWhatsApp: React.FC = () => {
   const [isQuickMenuOpen, setIsQuickMenuOpen] = useState(false);
   const quickMenuRef = useRef<HTMLDivElement>(null);
 
+  const [displayTestimonials, setDisplayTestimonials] = useState<typeof TESTIMONIALS>(() =>
+    [...TESTIMONIALS].sort(() => Math.random() - 0.5)
+  );
+  const [isRefreshingReviews, setIsRefreshingReviews] = useState(false);
+
+  // Embaralha e atualiza as avaliações
+  const refreshReviews = useCallback(() => {
+    setIsRefreshingReviews(true);
+    const shuffled = [...TESTIMONIALS].sort(() => Math.random() - 0.5);
+    setDisplayTestimonials(shuffled);
+    setTimeout(() => setIsRefreshingReviews(false), 350);
+  }, []);
+
   useEffect(() => {
     const handleOpenQuote = () => setIsQuoteModalOpen(true);
     const handleOpenAlertSigns = () => setIsAlertSignsModalOpen(true);
-    const handleOpenTestimonials = () => setIsTestimonialsModalOpen(true);
+    const handleOpenTestimonials = () => {
+      refreshReviews();
+      setIsTestimonialsModalOpen(true);
+    };
     const handleOpenCoverage = () => setIsCoverageModalOpen(true);
     const handleOpenFaq = () => setIsFaqModalOpen(true);
 
@@ -263,7 +279,7 @@ export const FloatingWhatsApp: React.FC = () => {
       window.removeEventListener('open-faq-modal', handleOpenFaq);
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, []);
+  }, [refreshReviews]);
 
   // Extrair zonas únicas para os grupos do dropdown
   const allZones = Array.from(new Set(NEIGHBORHOODS.map((n) => n.zone)));
@@ -278,7 +294,7 @@ export const FloatingWhatsApp: React.FC = () => {
     setOpenFaqId(openFaqId === id ? null : id);
   };
 
-  const filteredTestimonials = TESTIMONIALS.filter((t) => {
+  const filteredTestimonials = displayTestimonials.filter((t) => {
     const matchesFilter = testimonialFilter === 'all' || t.petSpecies === testimonialFilter || t.petSpecies === 'both';
     if (!testimonialSearch.trim()) return matchesFilter;
     const term = testimonialSearch.toLowerCase().trim();
@@ -367,6 +383,7 @@ export const FloatingWhatsApp: React.FC = () => {
               <button
                 type="button"
                 onClick={() => {
+                  refreshReviews();
                   setIsQuickMenuOpen(false);
                   setIsTestimonialsModalOpen(true);
                 }}
@@ -743,7 +760,7 @@ export const FloatingWhatsApp: React.FC = () => {
                     </span>
                   </h3>
                   <p className="text-xs text-brand-green-700 font-medium">
-                    233 avaliações com nota máxima de tutores em Peruíbe e região
+                    23 avaliações com nota máxima de tutores em Peruíbe e região
                   </p>
                 </div>
               </div>
@@ -773,8 +790,17 @@ export const FloatingWhatsApp: React.FC = () => {
                     <span>Google Meu Negócio:</span>
                     <span className="text-amber-600 font-extrabold">5.0 ★★★★★</span>
                     <span className="text-[11px] font-bold text-emerald-800 bg-emerald-100 px-2 py-0.2 rounded-full border border-emerald-200">
-                      233 Avaliações
+                      23 Avaliações
                     </span>
+                    <button
+                      type="button"
+                      onClick={refreshReviews}
+                      title="Atualizar ordem das avaliações"
+                      className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-800 bg-emerald-100/90 hover:bg-emerald-200/90 px-1.5 py-0.5 rounded-md transition-colors cursor-pointer border border-emerald-200"
+                    >
+                      <RotateCw className={`w-2.5 h-2.5 text-emerald-700 ${isRefreshingReviews ? 'animate-spin' : ''}`} />
+                      <span>Atualizado agora</span>
+                    </button>
                   </div>
                   <p className="text-[11px] text-gray-600 leading-tight">
                     Avaliações 100% autênticas e verificadas de tutores em Peruíbe.
@@ -788,7 +814,7 @@ export const FloatingWhatsApp: React.FC = () => {
                 rel="noopener noreferrer"
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 bg-white hover:bg-gray-50 text-[#1F2937] hover:text-brand-green-900 text-xs font-bold px-3.5 py-2 rounded-xl border border-gray-300/80 shadow-2xs hover:shadow-xs transition-all shrink-0 min-h-[36px]"
               >
-                <span>Ver todas as 233 no Google Maps</span>
+                <span>Ver todas as 23 no Google Maps</span>
                 <ExternalLink className="w-3.5 h-3.5 text-blue-600" />
               </a>
             </div>
@@ -912,10 +938,10 @@ export const FloatingWhatsApp: React.FC = () => {
                 </div>
                 <div>
                   <h4 className="font-display font-bold text-sm sm:text-base text-brand-green-900">
-                    233 Avaliações Reais com Nota 5.0 no Google Maps
+                    23 Avaliações Reais com Nota 5.0 no Google Maps
                   </h4>
                   <p className="text-xs text-gray-600 max-w-md mx-auto leading-relaxed mt-1">
-                    Confira todas as 233 avaliações na íntegra, com fotos e relatos detalhados dos tutores, diretamente no perfil verificado da Home.Vet no Google.
+                    Confira todas as 23 avaliações na íntegra, com fotos e relatos detalhados dos tutores, diretamente no perfil verificado da Home.Vet no Google.
                   </p>
                 </div>
                 <a
@@ -924,7 +950,7 @@ export const FloatingWhatsApp: React.FC = () => {
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-2 bg-[#166534] hover:bg-[#14532d] text-white text-xs font-bold px-5 py-2.5 rounded-xl shadow-pill transition-all cursor-pointer"
                 >
-                  <span>Abrir todas as 233 avaliações no Google Maps</span>
+                  <span>Abrir todas as 23 avaliações no Google Maps</span>
                   <ExternalLink className="w-3.5 h-3.5" />
                 </a>
               </div>
