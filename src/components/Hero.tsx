@@ -4,7 +4,7 @@ import { createWhatsAppLink, CLINIC_CONFIG } from '../data/content';
 
 export const Hero: React.FC = () => {
   return (
-    <section id="inicio" className="relative pt-24 pb-14 md:pt-32 md:pb-20 overflow-hidden">
+    <section id="inicio" className="relative pt-32 pb-14 sm:pt-36 md:pt-36 lg:pt-32 md:pb-20 overflow-hidden">
       {/* Decorative gentle pastel background blobs */}
       <div className="absolute top-12 left-1/2 -translate-x-1/2 w-full max-w-5xl h-80 bg-gradient-to-b from-brand-green-100/40 via-brand-yellow-100/20 to-transparent -z-10 rounded-[4rem] blur-3xl pointer-events-none" />
       <div className="absolute -top-20 -right-20 w-80 h-80 bg-brand-yellow-200/30 rounded-full blur-3xl pointer-events-none" />

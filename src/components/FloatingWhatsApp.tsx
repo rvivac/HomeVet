@@ -313,9 +313,9 @@ export const FloatingWhatsApp: React.FC = () => {
         ref={quickMenuRef}
         className="fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-50 flex flex-col items-end pointer-events-none"
       >
-        {/* Painel Expansível de Atalhos Rápidos */}
+        {/* Painel Expansível de Atalhos Rápidos (apenas desktop, no mobile fica fixo no topo) */}
         {isQuickMenuOpen && (
-          <div className="pointer-events-auto mb-3 bg-white/95 backdrop-blur-md rounded-3xl shadow-2xl border border-brand-green-200 p-3 sm:p-4 w-[290px] sm:w-[320px] animate-fadeIn transition-all">
+          <div className="hidden lg:block pointer-events-auto mb-3 bg-white/95 backdrop-blur-md rounded-3xl shadow-2xl border border-brand-green-200 p-3 sm:p-4 w-[290px] sm:w-[320px] animate-fadeIn transition-all">
             <div className="flex items-center justify-between pb-2.5 mb-2 border-b border-brand-green-100">
               <div className="flex items-center gap-1.5">
                 <Sparkles className="w-4 h-4 text-brand-yellow-500" />
@@ -432,11 +432,11 @@ export const FloatingWhatsApp: React.FC = () => {
 
         {/* Controles Flutuantes: Atalhos ACIMA de Monte seu Atendimento */}
         <div className="flex flex-col items-end gap-2.5 pointer-events-auto">
-          {/* Botão de Atalhos Rápidos (Acima) */}
+          {/* Botão de Atalhos Rápidos (Acima) - visível em desktop */}
           <button
             type="button"
             onClick={() => setIsQuickMenuOpen(!isQuickMenuOpen)}
-            className={`min-h-[44px] min-w-[44px] flex items-center justify-center gap-1.5 py-2 px-3.5 sm:px-4 rounded-full shadow-md border transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer backdrop-blur-md ${
+            className={`hidden lg:flex min-h-[44px] min-w-[44px] items-center justify-center gap-1.5 py-2 px-3.5 sm:px-4 rounded-full shadow-md border transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer backdrop-blur-md ${
               isQuickMenuOpen
                 ? 'bg-brand-green-900 text-white border-brand-green-700 shadow-xl'
                 : 'bg-white/95 text-brand-green-900 border-brand-green-200 hover:border-brand-green-400 hover:bg-white'

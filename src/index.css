@@ -49,4 +49,87 @@
   ::-webkit-scrollbar-thumb:hover {
     background: #9DCDB6;
   }
+
+  /* Quick Access Bar Mobile (estilo idêntico ao mobile do Krav-Maga Bukan Santos) */
+  .quick-access-bar {
+    display: none !important;
+  }
+
+  @media (max-width: 1023px) {
+    .quick-access-bar {
+      display: block !important;
+      width: 100%;
+      background: rgba(250, 249, 246, 0.98);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-top: 1px solid rgba(27, 77, 62, 0.08);
+      border-bottom: 1px solid rgba(27, 77, 62, 0.12);
+      position: relative;
+      z-index: 38;
+    }
+
+    .quick-access-track {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      align-items: stretch;
+      gap: 6px;
+      padding: 6px 10px;
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+    }
+
+    .quick-pill {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      padding: 6px 4px;
+      min-height: 36px;
+      background: rgba(52, 139, 103, 0.09);
+      border: 1px solid rgba(52, 139, 103, 0.28);
+      border-radius: 10px;
+      color: #144535;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      text-decoration: none;
+      line-height: 1;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+      text-align: center;
+      box-sizing: border-box;
+      width: 100%;
+    }
+
+    .quick-pill:hover,
+    .quick-pill:active {
+      background: rgba(52, 139, 103, 0.22);
+      border-color: #277053;
+      color: #0d3024;
+      transform: scale(0.98);
+    }
+
+    .quick-pill .pill-ico {
+      font-size: 13px;
+      line-height: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .quick-pill .pill-txt {
+      font-size: 11.5px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    section[id] {
+      scroll-margin-top: 115px;
+    }
+  }
 }
