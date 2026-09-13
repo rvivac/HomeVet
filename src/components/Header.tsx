@@ -50,23 +50,23 @@ export const Header: React.FC = () => {
           : 'bg-[#FAF9F6]/95 backdrop-blur-md'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between py-2.5 sm:py-3 lg:py-3.5">
+      <div className="max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8 flex items-center justify-between h-14 sm:h-16">
         {/* Brand Logo */}
         <a
           href="#inicio"
-          className="flex items-center gap-2.5 sm:gap-3 group transition-transform active:scale-95"
+          className="flex items-center gap-2 sm:gap-2.5 group transition-transform active:scale-95 shrink-0"
         >
-          <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-2xl bg-brand-green-800 flex items-center justify-center text-white shadow-soft group-hover:bg-brand-green-700 transition-colors shrink-0">
+          <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-brand-green-800 flex items-center justify-center text-white shadow-soft group-hover:bg-brand-green-700 transition-colors shrink-0">
             <div className="relative">
               <Home className="w-4 h-4 sm:w-5 sm:h-5 text-brand-green-100" />
               <Heart className="w-2 sm:w-2.5 h-2 sm:h-2.5 text-brand-yellow-400 absolute -bottom-0.5 -right-0.5 fill-brand-yellow-400" />
             </div>
           </div>
-          <div>
-            <span className="font-display font-bold text-base sm:text-xl text-brand-green-900 tracking-tight block leading-tight">
+          <div className="leading-tight">
+            <span className="font-display font-bold text-base sm:text-xl text-brand-green-900 tracking-tight block">
               {CLINIC_CONFIG.name}
             </span>
-            <span className="text-[11px] sm:text-xs text-brand-green-600 font-medium flex items-center gap-1">
+            <span className="text-[10px] sm:text-xs text-brand-green-600 font-medium flex items-center gap-1">
               <span className="w-1.5 h-1.5 rounded-full bg-whatsapp animate-ping"></span>
               Atendimento Domiciliar
             </span>
@@ -88,12 +88,12 @@ export const Header: React.FC = () => {
         </nav>
 
         {/* Header Right Action Button & Mobile Toggle */}
-        <div className="flex items-center gap-2 sm:gap-3">
+        <div className="flex items-center gap-2 sm:gap-3 shrink-0">
           <a
             href={createWhatsAppLink('Olá! Gostaria de agendar um atendimento veterinário em casa.')}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 sm:gap-2 bg-[#166534] hover:bg-[#14532d] text-white text-xs sm:text-sm font-bold px-3 py-2 sm:px-4 sm:py-2.5 rounded-full shadow-md transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 cursor-pointer min-h-[40px] sm:min-h-[44px]"
+            className="inline-flex items-center gap-1.5 bg-[#166534] hover:bg-[#14532d] text-white text-xs sm:text-sm font-bold px-3 py-1.5 sm:px-4 sm:py-2 rounded-full shadow-xs transition-all duration-200 hover:shadow-md hover:-translate-y-0.5 active:translate-y-0 cursor-pointer h-8 sm:h-9"
             aria-label="Agendar consulta diretamente pelo WhatsApp"
           >
             <MessageCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-white" />
@@ -104,7 +104,7 @@ export const Header: React.FC = () => {
           {/* Mobile Menu Toggle */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-2 min-w-[40px] min-h-[40px] flex items-center justify-center rounded-xl text-brand-green-900 hover:bg-brand-green-100 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-green-400 cursor-pointer"
+            className="lg:hidden p-1.5 w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center rounded-xl text-brand-green-900 hover:bg-brand-green-100 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-green-400 cursor-pointer"
             aria-label={mobileMenuOpen ? 'Fechar menu' : 'Abrir menu'}
           >
             {mobileMenuOpen ? <X className="w-5 h-5 sm:w-6 sm:h-6" /> : <Menu className="w-5 h-5 sm:w-6 sm:h-6" />}
@@ -112,54 +112,43 @@ export const Header: React.FC = () => {
         </div>
       </div>
 
-      {/* Barra de Acessos Rápidos Fixa no Topo (Sticky Secundário Mobile) */}
+      {/* Barra de Acessos Rápidos Fixa no Topo (Sticky Secundário Mobile - Idêntico ao Krav-Maga Bukan Santos) */}
       <aside
         className="quick-access-bar lg:hidden w-full border-t border-brand-green-200/60 border-b border-brand-green-200/60 bg-[#FAF9F6]/98 backdrop-blur-md"
         id="quickAccessBar"
         aria-label="Acessos rápidos"
       >
-        <div className="quick-access-track max-w-7xl mx-auto grid grid-cols-4 gap-1.5 px-2.5 sm:px-4 py-1.5 w-full box-border">
+        <div className="quick-access-track max-w-7xl mx-auto grid grid-cols-3 gap-1.5 px-3 py-1.5 w-full box-border">
           {/* 1. Quando Chamar */}
           <button
             type="button"
             onClick={() => openShortcutModal('open-alert-signs-modal')}
-            className="quick-pill flex items-center justify-center gap-1 sm:gap-1.5 py-1.5 px-1 sm:px-2 min-h-[36px] bg-brand-green-50/80 hover:bg-brand-green-100/90 active:bg-brand-green-200/70 border border-brand-green-200/80 rounded-xl text-brand-green-950 font-bold text-[11px] sm:text-xs transition-all active:scale-95 cursor-pointer text-center select-none"
+            className="quick-pill flex items-center justify-center gap-1.5 py-1.5 px-2 min-h-[38px] bg-brand-green-50/85 hover:bg-brand-green-100/90 active:bg-brand-green-200/80 border border-brand-green-300/60 rounded-xl text-brand-green-950 font-bold text-xs transition-all active:scale-95 cursor-pointer text-center select-none shadow-2xs"
             aria-label="Sinais de alerta: quando chamar o veterinário"
           >
-            <span className="pill-ico text-xs sm:text-sm leading-none flex items-center justify-center shrink-0" aria-hidden="true">🚨</span>
+            <span className="pill-ico text-sm leading-none flex items-center justify-center shrink-0" aria-hidden="true">🚨</span>
             <span className="pill-txt truncate leading-tight">Quando Chamar</span>
           </button>
 
-          {/* 2. Regiões */}
+          {/* 2. Onde Atende */}
           <button
             type="button"
             onClick={() => openShortcutModal('open-coverage-modal')}
-            className="quick-pill flex items-center justify-center gap-1 sm:gap-1.5 py-1.5 px-1 sm:px-2 min-h-[36px] bg-brand-green-50/80 hover:bg-brand-green-100/90 active:bg-brand-green-200/70 border border-brand-green-200/80 rounded-xl text-brand-green-950 font-bold text-[11px] sm:text-xs transition-all active:scale-95 cursor-pointer text-center select-none"
+            className="quick-pill flex items-center justify-center gap-1.5 py-1.5 px-2 min-h-[38px] bg-brand-green-50/85 hover:bg-brand-green-100/90 active:bg-brand-green-200/80 border border-brand-green-300/60 rounded-xl text-brand-green-950 font-bold text-xs transition-all active:scale-95 cursor-pointer text-center select-none shadow-2xs"
             aria-label="Ver regiões e bairros atendidos"
           >
-            <span className="pill-ico text-xs sm:text-sm leading-none flex items-center justify-center shrink-0" aria-hidden="true">📍</span>
-            <span className="pill-txt truncate leading-tight">Regiões</span>
+            <span className="pill-ico text-sm leading-none flex items-center justify-center shrink-0" aria-hidden="true">📍</span>
+            <span className="pill-txt truncate leading-tight">Onde Atende</span>
           </button>
 
-          {/* 3. Avaliações */}
-          <button
-            type="button"
-            onClick={() => openShortcutModal('open-testimonials-modal')}
-            className="quick-pill flex items-center justify-center gap-1 sm:gap-1.5 py-1.5 px-1 sm:px-2 min-h-[36px] bg-brand-green-50/80 hover:bg-brand-green-100/90 active:bg-brand-green-200/70 border border-brand-green-200/80 rounded-xl text-brand-green-950 font-bold text-[11px] sm:text-xs transition-all active:scale-95 cursor-pointer text-center select-none"
-            aria-label="Ver avaliações e depoimentos de tutores"
-          >
-            <span className="pill-ico text-xs sm:text-sm leading-none flex items-center justify-center shrink-0" aria-hidden="true">⭐</span>
-            <span className="pill-txt truncate leading-tight">Avaliações</span>
-          </button>
-
-          {/* 4. Dúvidas */}
+          {/* 3. Dúvidas */}
           <button
             type="button"
             onClick={() => openShortcutModal('open-faq-modal')}
-            className="quick-pill flex items-center justify-center gap-1 sm:gap-1.5 py-1.5 px-1 sm:px-2 min-h-[36px] bg-brand-green-50/80 hover:bg-brand-green-100/90 active:bg-brand-green-200/70 border border-brand-green-200/80 rounded-xl text-brand-green-950 font-bold text-[11px] sm:text-xs transition-all active:scale-95 cursor-pointer text-center select-none"
+            className="quick-pill flex items-center justify-center gap-1.5 py-1.5 px-2 min-h-[38px] bg-brand-green-50/85 hover:bg-brand-green-100/90 active:bg-brand-green-200/80 border border-brand-green-300/60 rounded-xl text-brand-green-950 font-bold text-xs transition-all active:scale-95 cursor-pointer text-center select-none shadow-2xs"
             aria-label="Ver perguntas frequentes e dúvidas"
           >
-            <span className="pill-ico text-xs sm:text-sm leading-none flex items-center justify-center shrink-0" aria-hidden="true">❓</span>
+            <span className="pill-ico text-sm leading-none flex items-center justify-center shrink-0" aria-hidden="true">❓</span>
             <span className="pill-txt truncate leading-tight">Dúvidas</span>
           </button>
         </div>
@@ -177,11 +166,27 @@ export const Header: React.FC = () => {
                   setMobileMenuOpen(false);
                   handleNavClick(link.href, e);
                 }}
-                className="text-base font-semibold text-[#1F2937] hover:text-brand-green-900 py-3 px-3 rounded-xl hover:bg-brand-green-50 transition-colors cursor-pointer min-h-[44px] flex items-center"
+                className="text-base font-semibold text-[#1F2937] hover:text-brand-green-900 py-2.5 px-3 rounded-xl hover:bg-brand-green-50 transition-colors cursor-pointer min-h-[44px] flex items-center"
               >
                 {link.label}
               </a>
             ))}
+
+            {/* Acesso rápido a avaliações no drawer */}
+            <button
+              type="button"
+              onClick={() => openShortcutModal('open-testimonials-modal')}
+              className="text-base font-semibold text-[#1F2937] hover:text-brand-green-900 py-2.5 px-3 rounded-xl hover:bg-brand-green-50 transition-colors cursor-pointer min-h-[44px] flex items-center justify-between"
+            >
+              <span className="flex items-center gap-2">
+                <span>⭐</span>
+                <span>Depoimentos & Avaliações</span>
+              </span>
+              <span className="text-[11px] bg-amber-100 text-amber-800 font-bold px-2 py-0.5 rounded-full">
+                5.0 ★
+              </span>
+            </button>
+
             <div className="pt-3 mt-1 border-t border-brand-green-100 flex flex-col gap-2">
               <button
                 type="button"

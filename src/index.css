@@ -70,10 +70,10 @@
 
     .quick-access-track {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       align-items: stretch;
       gap: 6px;
-      padding: 6px 10px;
+      padding: 5px 10px 6px;
       width: 100%;
       max-width: 100%;
       box-sizing: border-box;
@@ -83,14 +83,14 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 4px;
+      gap: 5px;
       padding: 6px 4px;
-      min-height: 36px;
+      min-height: 38px;
       background: rgba(52, 139, 103, 0.09);
       border: 1px solid rgba(52, 139, 103, 0.28);
       border-radius: 10px;
       color: #144535;
-      font-size: 12px;
+      font-size: 12.5px;
       font-weight: 700;
       letter-spacing: 0.01em;
       text-decoration: none;
@@ -113,7 +113,7 @@
     }
 
     .quick-pill .pill-ico {
-      font-size: 13px;
+      font-size: 14px;
       line-height: 1;
       display: inline-flex;
       align-items: center;
@@ -122,14 +122,14 @@
     }
 
     .quick-pill .pill-txt {
-      font-size: 11.5px;
+      font-size: 12px;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
 
     section[id] {
-      scroll-margin-top: 115px;
+      scroll-margin-top: 106px;
     }
   }
 }

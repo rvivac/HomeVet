@@ -4,7 +4,7 @@ import { createWhatsAppLink, CLINIC_CONFIG } from '../data/content';
 
 export const Hero: React.FC = () => {
   return (
-    <section id="inicio" className="relative pt-32 pb-14 sm:pt-36 md:pt-36 lg:pt-32 md:pb-20 overflow-hidden">
+    <section id="inicio" className="relative pt-28 pb-12 sm:pt-32 md:pt-36 lg:pt-32 md:pb-20 overflow-hidden">
       {/* Decorative gentle pastel background blobs */}
       <div className="absolute top-12 left-1/2 -translate-x-1/2 w-full max-w-5xl h-80 bg-gradient-to-b from-brand-green-100/40 via-brand-yellow-100/20 to-transparent -z-10 rounded-[4rem] blur-3xl pointer-events-none" />
       <div className="absolute -top-20 -right-20 w-80 h-80 bg-brand-yellow-200/30 rounded-full blur-3xl pointer-events-none" />
@@ -13,13 +13,13 @@ export const Hero: React.FC = () => {
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         
         {/* Friendly pill badge */}
-        <div className="inline-flex items-center gap-2 bg-brand-green-100 border border-brand-green-300 px-4 py-1.5 rounded-full text-brand-green-900 text-xs sm:text-sm font-bold mb-5 shadow-2xs">
-          <Sparkles className="w-4 h-4 text-brand-yellow-500 fill-brand-yellow-400" />
+        <div className="inline-flex items-center gap-2 bg-brand-green-100 border border-brand-green-300 px-3.5 py-1 sm:px-4 sm:py-1.5 rounded-full text-brand-green-900 text-xs sm:text-sm font-bold mb-3.5 sm:mb-5 shadow-2xs">
+          <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-brand-yellow-500 fill-brand-yellow-400" />
           <span>Atendimento Veterinário em Domicílio • Peruíbe e Região</span>
         </div>
 
         {/* H1 Principal: Proposta de Valor Clara na Primeira Dobra */}
-        <h1 className="font-display font-extrabold text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] text-brand-green-900 leading-[1.2] tracking-tight mb-5 max-w-4xl mx-auto">
+        <h1 className="font-display font-extrabold text-2xl sm:text-4xl md:text-5xl lg:text-[3.25rem] text-brand-green-900 leading-[1.2] tracking-tight mb-3.5 sm:mb-5 max-w-4xl mx-auto">
           O atendimento veterinário que vai até você,{' '}
           <span className="relative inline-block text-brand-green-800">
             sem o estresse
@@ -42,12 +42,12 @@ export const Hero: React.FC = () => {
         </h1>
 
         {/* Subtítulo da Proposta de Valor */}
-        <p className="text-base sm:text-lg md:text-xl text-[#374151] max-w-3xl mx-auto font-normal leading-relaxed mb-8">
+        <p className="text-sm sm:text-lg md:text-xl text-[#374151] max-w-3xl mx-auto font-normal leading-relaxed mb-6 sm:mb-8">
           Atendimento veterinário domiciliar em Peruíbe e região. Consultas clínicas de rotina, vacinação, coleta de exames, microchipagem, atestados e cirurgias sob consulta no conforto do seu lar.
         </p>
 
         {/* CTAs Primário e Secundário Above the Fold */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 sm:gap-4 max-w-md sm:max-w-none mx-auto mb-8">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 max-w-md sm:max-w-none mx-auto mb-6 sm:mb-8">
           {/* CTA Primário - Alto Contraste (WCAG AA) com alvo de toque amplo (≥ 48px) */}
           <a
             href={createWhatsAppLink('Olá, Dr. Renato! Gostaria de agendar um atendimento veterinário em domicílio para o meu pet.')}
