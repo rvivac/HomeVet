@@ -61,9 +61,10 @@ export const Header: React.FC = () => {
             <span className="font-display font-bold text-lg sm:text-xl text-brand-green-900 tracking-tight block leading-tight">
               {CLINIC_CONFIG.name}
             </span>
-            <span className="text-xs text-brand-green-600 font-medium flex items-center gap-1">
-              <span className="w-1.5 h-1.5 rounded-full bg-whatsapp animate-ping"></span>
-              Atendimento Domiciliar
+            <span className="text-[11px] sm:text-xs text-brand-green-700 font-medium flex items-center gap-1.5 leading-none mt-0.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-whatsapp animate-ping shrink-0" />
+              <span className="hidden sm:inline">Atendimento Domiciliar em Peruíbe e Região</span>
+              <span className="sm:hidden">Domiciliar • Peruíbe e Região</span>
             </span>
           </div>
         </a>
