@@ -135,8 +135,9 @@ export const InteractiveQuoteModal: React.FC<{
             >
               <option value="Consulta Clínica de Rotina">Consulta Clínica de Rotina / Check-up</option>
               <option value="Vacinação Ética Importada">Vacinação Ética Importada</option>
-              <option value="Coleta de Exames Laboratoriais">Coleta de Exames Laboratoriais em Casa</option>
-              <option value="Microchipagem e Atestado">Microchipagem e Atestados de Viagem</option>
+              <option value="Coleta de Exames Laboratoriais">Coleta de Exames Laboratoriais no Lar</option>
+              <option value="Microchipagem e Atestados">Microchipagem e Atestados (Saúde / Viagem)</option>
+              <option value="Cirurgias sob Consulta">Cirurgias sob Consulta (Avaliação no Lar)</option>
               <option value="Avaliação Geral e Dúvidas">Outra necessidade ou dúvida específica</option>
             </select>
           </div>

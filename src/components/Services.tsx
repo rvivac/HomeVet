@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { Stethoscope, Syringe, FlaskConical, Heart, Check, MessageCircle, Sparkles, Award, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Stethoscope, Syringe, FlaskConical, Heart, Check, MessageCircle, Sparkles, Award, ChevronLeft, ChevronRight, HeartHandshake } from 'lucide-react';
 import { SERVICES, createWhatsAppLink } from '../data/content';
 
 export const Services: React.FC = () => {
-  // Mobile active tab (0: Consultas, 1: Vacinas, 2: Exames, 3: Microchip)
+  // Mobile active tab (0: Consultas, 1: Vacinas, 2: Exames, 3: Microchip, 4: Cirurgias)
   const [activeTab, setActiveTab] = useState(0);
 
-  const tabLabels = ['Consultas', 'Vacinas', 'Exames', 'Microchip'];
+  const tabLabels = ['Consultas', 'Vacinas', 'Exames', 'Microchip', 'Cirurgias'];
 
   const prevTab = () => {
     setActiveTab(prev => (prev === 0 ? SERVICES.length - 1 : prev - 1));
@@ -26,6 +26,8 @@ export const Services: React.FC = () => {
         return FlaskConical;
       case 'Award':
         return Award;
+      case 'HeartHandshake':
+        return HeartHandshake;
       case 'Heart':
         return Heart;
       default:
@@ -59,6 +61,12 @@ export const Services: React.FC = () => {
         activeBorder: 'border-brand-peach-300 ring-2 ring-brand-peach-200/60',
         accentBg: 'bg-brand-peach-50/50',
       },
+      {
+        bgBadge: 'bg-teal-100 text-teal-800',
+        cardBorder: 'hover:border-teal-300',
+        activeBorder: 'border-teal-400 ring-2 ring-teal-200/60',
+        accentBg: 'bg-teal-50/50',
+      },
     ];
     return palettes[index % palettes.length];
   };
@@ -89,12 +97,13 @@ export const Services: React.FC = () => {
 
         {/* MOBILE VIEW: Segmented Tabs & Active Service Card */}
         <div className="md:hidden max-w-lg mx-auto">
-          {/* Segmented Pill Tabs Bar (2x2 Grid for instant thumb reach) */}
+          {/* Segmented Pill Tabs Bar (Grid responsiva com suporte a 5 itens) */}
           <div className="grid grid-cols-2 gap-2 mb-4" role="tablist" aria-label="Seletor de Serviços">
             {SERVICES.map((service, index) => {
               const IconComponent = getIcon(service.iconName);
               const isSelected = activeTab === index;
               const palette = getColors(index);
+              const isLastOdd = SERVICES.length % 2 !== 0 && index === SERVICES.length - 1;
 
               return (
                 <button
@@ -102,6 +111,8 @@ export const Services: React.FC = () => {
                   type="button"
                   onClick={() => setActiveTab(index)}
                   className={`flex items-center gap-2.5 py-2.5 px-3 rounded-2xl border font-bold text-xs transition-all duration-200 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-green-400 ${
+                    isLastOdd ? 'col-span-2' : ''
+                  } ${
                     isSelected
                       ? 'bg-brand-petrol-600 text-white border-brand-petrol-600 shadow-md ring-2 ring-brand-petrol-300/50'
                       : 'bg-brand-bg text-brand-green-900 border-brand-green-200/80 hover:bg-brand-green-50 shadow-2xs'
@@ -226,8 +237,8 @@ export const Services: React.FC = () => {
           })()}
         </div>
 
-        {/* DESKTOP VIEW: 4 Cards Grid */}
-        <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* DESKTOP VIEW: 5 Cards Grid */}
+        <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5">
           {SERVICES.map((service, index) => {
             const IconComponent = getIcon(service.iconName);
             const palette = getColors(index);

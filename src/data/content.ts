@@ -3,7 +3,7 @@ import type { ServiceItem, BenefitItem, TestimonialItem, NeighborhoodItem, FAQIt
 export const CLINIC_CONFIG = {
   name: 'Home.Vet',
   tagline: 'O atendimento veterinário que vai até você, sem o estresse da clínica.',
-  shortDescription: 'Consultas, vacinas importadas e exames no conforto e segurança do lar para cães e gatos em Peruíbe e região.',
+  shortDescription: 'Atendimento veterinário domiciliar em Peruíbe e região. Consultas clínicas de rotina, vacinação, coleta de exames, microchipagem, atestados e cirurgias sob consulta no conforto do seu lar.',
   
   // Contatos e Redes Oficiais
   whatsappNumber: '5513981864513',
@@ -155,6 +155,20 @@ export const SERVICES: ServiceItem[] = [
       'Documentações sanitárias para viagens',
     ],
     suggestedMsg: 'Olá, Dr. Renato! Gostaria de informações sobre microchipagem ou atestado de viagem para o meu pet.',
+  },
+  {
+    id: 'cirurgias',
+    title: 'Cirurgias sob Consulta',
+    shortDesc: 'Avaliação pré-operatória no lar e procedimentos realizados em centros cirúrgicos parceiros credenciados.',
+    longDesc: 'Avaliação clínica minuciosa no lar para pequenos procedimentos eletivos e cirurgias. A intervenção cirúrgica é realizada com total segurança em centros cirúrgicos parceiros credenciados e equipados.',
+    iconName: 'HeartHandshake',
+    badge: 'Avaliação & Parceria',
+    features: [
+      'Avaliação pré-operatória minuciosa no lar',
+      'Procedimento em centro cirúrgico credenciado',
+      'Acompanhamento e curativos pós-operatórios',
+    ],
+    suggestedMsg: 'Olá, Dr. Renato! Gostaria de uma avaliação no lar sobre procedimento cirúrgico para o meu pet.',
   },
 ];
 

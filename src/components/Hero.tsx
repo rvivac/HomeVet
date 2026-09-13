@@ -43,7 +43,7 @@ export const Hero: React.FC = () => {
 
         {/* Subtítulo da Proposta de Valor */}
         <p className="text-base sm:text-lg md:text-xl text-[#374151] max-w-3xl mx-auto font-normal leading-relaxed mb-8">
-          Consultas, vacinas e exames preventivos no conforto e segurança do lar para cães e gatos. O cuidado que seu pet merece, sem o trauma do transporte ou salas de espera.
+          Atendimento veterinário domiciliar em Peruíbe e região. Consultas clínicas de rotina, vacinação, coleta de exames, microchipagem, atestados e cirurgias sob consulta no conforto do seu lar.
         </p>
 
         {/* CTAs Primário e Secundário Above the Fold */}
