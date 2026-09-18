@@ -1,6 +1,7 @@
 import React from 'react';
 import { Heart, MessageCircle, ShieldCheck, Clock, MapPin, ExternalLink } from 'lucide-react';
 import { CLINIC_CONFIG, createWhatsAppLink } from '../data/content';
+import logoEmblemWhite from '../assets/logo-emblem-white.png';
 
 export const Footer: React.FC = () => {
   return (
@@ -14,7 +15,7 @@ export const Footer: React.FC = () => {
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-2xl bg-brand-green-800 flex items-center justify-center p-1.5 text-white border border-brand-green-700">
                 <img
-                  src="/images/logo-emblem-white.png"
+                  src={logoEmblemWhite}
                   alt={CLINIC_CONFIG.name}
                   className="w-full h-full object-contain"
                 />

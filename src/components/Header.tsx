@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { MessageCircle, Menu, X, Heart } from 'lucide-react';
 import { CLINIC_CONFIG, createWhatsAppLink } from '../data/content';
+import logoEmblemWhite from '../assets/logo-emblem-white.png';
 
 export const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -58,7 +59,7 @@ export const Header: React.FC = () => {
         >
           <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-brand-green-800 flex items-center justify-center p-1.5 shadow-soft group-hover:bg-brand-green-700 transition-colors shrink-0">
             <img
-              src="/images/logo-emblem-white.png"
+              src={logoEmblemWhite}
               alt={CLINIC_CONFIG.name}
               className="w-full h-full object-contain group-hover:scale-105 transition-transform"
             />
