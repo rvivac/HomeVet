@@ -230,9 +230,14 @@ export const Footer: React.FC = () => {
             © {new Date().getFullYear()} {CLINIC_CONFIG.name}. Todos os direitos reservados. {CLINIC_CONFIG.crmv}.
           </p>
           <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 text-center md:text-right">
-            <span className="text-brand-green-100 font-medium">
-              Design &amp; Desenvolvimento · 2026 Rvivac Guild LTDA
-            </span>
+            <a
+              href="https://www.rvivacguild.com.br"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-brand-green-100 hover:text-brand-yellow-300 transition-colors font-medium underline-offset-2 hover:underline"
+            >
+              Design &amp; Desenvolvimento · 2026 Rvivac Guild
+            </a>
             <span className="hidden sm:inline text-brand-green-600">•</span>
             <p className="flex items-center justify-center gap-1 text-brand-green-200">
               Feito com <Heart className="w-3.5 h-3.5 text-rose-400 fill-rose-400" /> para os pets e tutores de Peruíbe e região.
