@@ -56,18 +56,13 @@ export const Header: React.FC = () => {
           href="#inicio"
           className="flex items-center gap-2 sm:gap-2.5 group transition-transform active:scale-95 shrink-0"
         >
-          <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-brand-green-800 flex items-center justify-center p-1.5 shadow-soft group-hover:bg-brand-green-700 transition-colors shrink-0">
-            <img
-              src="/images/logo-icon-white.png"
-              alt="Home.Vet Peruíbe"
-              className="w-full h-full object-contain"
-            />
-          </div>
-          <div className="leading-tight">
-            <span className="font-display font-bold text-base sm:text-xl text-brand-green-900 tracking-tight block">
-              {CLINIC_CONFIG.name}
-            </span>
-            <span className="text-[10px] sm:text-xs text-brand-green-600 font-medium flex items-center gap-1.5">
+          <img
+            src="/images/logo-full.png"
+            alt={CLINIC_CONFIG.name}
+            className="h-11 sm:h-13 w-auto object-contain shrink-0 group-hover:scale-105 transition-transform"
+          />
+          <div className="flex flex-col justify-center border-l border-brand-green-200/80 pl-2 sm:pl-2.5 leading-none">
+            <span className="text-[10px] sm:text-xs text-brand-green-700 font-semibold flex items-center gap-1.5 whitespace-nowrap">
               <Heart className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-rose-500 fill-rose-500 animate-heartbeat shrink-0" />
               Atendimento Domiciliar
             </span>
