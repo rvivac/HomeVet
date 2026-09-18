@@ -1,4 +1,5 @@
 import React from 'react';
+import { NetworkSplash } from './components/NetworkSplash';
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
 import { HealthPlansBar } from './components/HealthPlansBar';
@@ -11,6 +12,9 @@ import { FloatingWhatsApp } from './components/FloatingWhatsApp';
 export const App: React.FC = () => {
   return (
     <div className="min-h-screen flex flex-col bg-brand-bg text-[#2D3748] font-sans antialiased selection:bg-brand-green-200 selection:text-brand-green-900">
+      {/* Splash Screen Inteligente Dependente da Rede com Coração Pulsante */}
+      <NetworkSplash />
+
       {/* Fixed Header & Navigation */}
       <Header />
 
