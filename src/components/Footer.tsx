@@ -12,11 +12,16 @@ export const Footer: React.FC = () => {
           {/* Brand Info */}
           <div className="lg:col-span-4 space-y-4">
             <div className="flex items-center gap-3">
-              <img
-                src="/images/logo-full-white.png"
-                alt="Home.Vet Peruíbe"
-                className="h-16 w-auto object-contain"
-              />
+              <div className="w-10 h-10 rounded-2xl bg-brand-green-800 flex items-center justify-center p-1.5 text-white border border-brand-green-700">
+                <img
+                  src="/images/logo-emblem-white.png"
+                  alt={CLINIC_CONFIG.name}
+                  className="w-full h-full object-contain"
+                />
+              </div>
+              <span className="font-display font-bold text-xl text-white tracking-tight">
+                {CLINIC_CONFIG.name}
+              </span>
             </div>
 
             <p className="text-sm text-brand-green-100/80 leading-relaxed max-w-sm">
