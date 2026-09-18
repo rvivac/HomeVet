@@ -35,6 +35,31 @@
     border-bottom: 1px solid rgba(27, 77, 62, 0.08);
   }
 
+  /* Animação suave de batimento de coração */
+  @keyframes heartbeat {
+    0%, 100% {
+      transform: scale(1);
+    }
+    14% {
+      transform: scale(1.35);
+    }
+    28% {
+      transform: scale(1);
+    }
+    42% {
+      transform: scale(1.22);
+    }
+    70% {
+      transform: scale(1);
+    }
+  }
+
+  .animate-heartbeat {
+    animation: heartbeat 1.5s ease-in-out infinite;
+    transform-origin: center;
+    display: inline-block;
+  }
+
   /* Custom subtle scrollbar */
   ::-webkit-scrollbar {
     width: 8px;

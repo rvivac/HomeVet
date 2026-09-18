@@ -1,5 +1,5 @@
 import React from 'react';
-import { Home, Heart, MessageCircle, ShieldCheck, Clock, MapPin, ExternalLink } from 'lucide-react';
+import { Heart, MessageCircle, ShieldCheck, Clock, MapPin, ExternalLink } from 'lucide-react';
 import { CLINIC_CONFIG, createWhatsAppLink } from '../data/content';
 
 export const Footer: React.FC = () => {
@@ -12,8 +12,12 @@ export const Footer: React.FC = () => {
           {/* Brand Info */}
           <div className="lg:col-span-4 space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-2xl bg-brand-green-800 flex items-center justify-center text-white border border-brand-green-700">
-                <Home className="w-5 h-5 text-brand-green-100" />
+              <div className="w-10 h-10 rounded-2xl bg-brand-green-800 flex items-center justify-center p-1.5 text-white border border-brand-green-700">
+                <img
+                  src="/images/logo-icon-white.png"
+                  alt="Home.Vet Peruíbe"
+                  className="w-full h-full object-contain"
+                />
               </div>
               <span className="font-display font-bold text-xl text-white tracking-tight">
                 {CLINIC_CONFIG.name}

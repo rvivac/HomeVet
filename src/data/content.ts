@@ -1,7 +1,7 @@
 import type { ServiceItem, BenefitItem, TestimonialItem, NeighborhoodItem, FAQItem, TeamMember } from '../types';
 
 export const CLINIC_CONFIG = {
-  name: 'Home.Vet',
+  name: 'Home.Vet.Peruíbe',
   tagline: 'O atendimento veterinário que vai até você, sem o estresse da clínica.',
   shortDescription: 'Atendimento veterinário domiciliar em Peruíbe e região. Consultas clínicas de rotina, vacinação, coleta de exames, microchipagem, atestados e cirurgias sob consulta no conforto do seu lar.',
   

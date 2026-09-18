@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { MessageCircle, Menu, X, Heart, Home } from 'lucide-react';
+import { MessageCircle, Menu, X, Heart } from 'lucide-react';
 import { CLINIC_CONFIG, createWhatsAppLink } from '../data/content';
 
 export const Header: React.FC = () => {
@@ -56,18 +56,19 @@ export const Header: React.FC = () => {
           href="#inicio"
           className="flex items-center gap-2 sm:gap-2.5 group transition-transform active:scale-95 shrink-0"
         >
-          <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-brand-green-800 flex items-center justify-center text-white shadow-soft group-hover:bg-brand-green-700 transition-colors shrink-0">
-            <div className="relative">
-              <Home className="w-4 h-4 sm:w-5 sm:h-5 text-brand-green-100" />
-              <Heart className="w-2 sm:w-2.5 h-2 sm:h-2.5 text-brand-yellow-400 absolute -bottom-0.5 -right-0.5 fill-brand-yellow-400" />
-            </div>
+          <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-brand-green-800 flex items-center justify-center p-1.5 shadow-soft group-hover:bg-brand-green-700 transition-colors shrink-0">
+            <img
+              src="/images/logo-icon-white.png"
+              alt="Home.Vet Peruíbe"
+              className="w-full h-full object-contain"
+            />
           </div>
           <div className="leading-tight">
             <span className="font-display font-bold text-base sm:text-xl text-brand-green-900 tracking-tight block">
               {CLINIC_CONFIG.name}
             </span>
-            <span className="text-[10px] sm:text-xs text-brand-green-600 font-medium flex items-center gap-1">
-              <span className="w-1.5 h-1.5 rounded-full bg-whatsapp animate-ping"></span>
+            <span className="text-[10px] sm:text-xs text-brand-green-600 font-medium flex items-center gap-1.5">
+              <Heart className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-rose-500 fill-rose-500 animate-heartbeat shrink-0" />
               Atendimento Domiciliar
             </span>
           </div>
